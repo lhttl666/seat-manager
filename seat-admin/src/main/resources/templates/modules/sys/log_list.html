@@ -22,7 +22,6 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" id="checkAll">全选</th>
                         <th>用户名</th>
                         <th>操作</th>
                         <th>请求方法</th>
@@ -52,7 +51,7 @@
         $("#pageId").load("doPageUI", doGetObjects);  // 方法后不能加(),否则是立刻执行
     })
 
-    function dogetObjects() {
+    function doGetObjects() {
         // 1.params
         let params = {pageCurrent: 1}; // 暂时写死为1
         // 2.url
@@ -60,37 +59,42 @@
         // 3.ajax
         $.ajax({
             url: url,
-            params: params,
+            data: params,
             success(result) {
                 // 处理查询到的结果
+                console.log("result" + result);
                 doHandleQueryResponseResult(result);
             }
         })
     }
 
     function doHandleQueryResponseResult(result) {
+        console.log("result.state=" + result.state);
+        console.log("result.data.records= " + result.data.records)
         if (result.state == 1) {
             doSetTableBodyRows(result.data.records);
         } else {
             // doSetTableBodyErrors(result.message);
         }
+
     }
 
-    function doSetTableBodyRows(records){
-        let tBody = $("tbodyId");
+    function doSetTableBodyRows(records) {
+        let tBody = $("#tbodyId");
         tBody.empty() //清空元素内部
-        records.forEach(item=>tBody.append(doCreateRow(item)));
+        records.forEach((item) => tBody.append(doCreateRow(item)));
     }
 
-    function doCreateRow(item){
+    //渲染行
+    function doCreateRow(item) {
         return `<tr>
-                    <td>${item.username}</td>
-                    <td>${item.operation}</td>
-                    <td>${item.method}</td>
-                    <td>${item.params}</td>
-                    <td>${item.ip}</td>
-                    <td>${item.time}</td>
-                </tr>>`;
+            <td> ${item.username} </td>
+            <td> ${item.operation} </td>
+            <td> ${item.method} </td>
+            <td> ${item.params} </td>
+            <td> ${item.ip} </td>
+            <td> ${item.time} </td>
+           </tr>`
     }
 
 </script>

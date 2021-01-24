@@ -26,6 +26,7 @@ public class SysLogServiceImpl implements SysLogService {
         int pageSize = 5;//页面大小，每页最多显示多少条记录
         int startIndex = (pageCurrent - 1) * pageSize;//当前页起始位置
         List<SysLog> records = sysLogDao.findPageObjects(username, startIndex, pageSize);
+        // records.forEach(a-> System.out.println(a)); // 获取数据正常
         //4.封装查询结果
         return new PageObject<>(rowCount, records, pageSize, pageCurrent);
     }

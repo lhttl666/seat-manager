@@ -16,7 +16,7 @@ public class PageController {
 
     @GetMapping("/{module}/{moduleUI}")
     public String doModuleUI(@PathVariable String moduleUI) {
-        return "sys/" + moduleUI;
+        return "/sys/" + moduleUI;
     }
 
     @GetMapping("/doPageUI")

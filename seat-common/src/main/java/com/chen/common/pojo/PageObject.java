@@ -14,17 +14,18 @@ public class PageObject<T> implements Serializable {
     private Integer rowCount;
     // 当前页的记录
     private List<T> records;
-    // 当前页码值
-    private Integer pageCurrent;
-    // 页面大小
-    private Integer pageSize;
     // 总页数
     private Integer pageCount;
+    // 页面大小
+    private Integer pageSize;
+    // 当前页码值
+    private Integer pageCurrent;
+
 
     public PageObject() {
     }
 
-    public PageObject(Integer rowCount, List<T> records, Integer pageCurrent, Integer pageSize) {
+    public PageObject(Integer rowCount, List<T> records, Integer pageSize, Integer pageCurrent) {
         this.rowCount = rowCount;
         this.records = records;
         this.pageCurrent = pageCurrent;
