@@ -53,11 +53,10 @@
     })
 
     function doGetObjects() {
-        // 1.params
-        let params = {pageCurrent: 1}; // 暂时写死为1
-        // 2.url
+        let pageCurrent = $("#pageId").data("pageCurrent");
+        if (!pageCurrent) pageCurrent = 1;
+        let params = {pageCurrent: pageCurrent}; // 暂时写死为1
         let url = 'log/doFindPageObjects';
-        // 3.ajax
         $.ajax({
             url: url,
             data: params,
@@ -72,6 +71,7 @@
     function doHandleQueryResponseResult(result) {
         if (result.state == 1) {
             doSetTableBodyRows(result.data.records);
+            doSetPagination(result.data) //pageObject
         } else {
             doSetTableBodyErrors(result.message);
         }
