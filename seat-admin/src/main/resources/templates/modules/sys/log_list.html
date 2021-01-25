@@ -50,12 +50,17 @@
 <script type="text/javascript">
     $(function () {
         $("#pageId").load("doPageUI", doGetObjects);  // 方法后不能加(),否则是立刻执行
+        // 注册查询栏点击事件
+        $(".input-group-btn").on("click", ".btn-search", doQueryObjects);
+
     })
 
     function doGetObjects() {
         let pageCurrent = $("#pageId").data("pageCurrent");
         if (!pageCurrent) pageCurrent = 1;
-        let params = {pageCurrent: pageCurrent}; // 暂时写死为1
+        let params = {pageCurrent: pageCurrent};
+        let queryName = $("#searchNameId").val(); // 获取输入的名字
+        if (queryName) params.username = queryName;
         let url = 'log/doFindPageObjects';
         $.ajax({
             url: url,
@@ -104,7 +109,12 @@
         let tBody = $("#log-table>tbody");
         let msgRow = `<tr><td colspan=${thColNums}>${message}</td></tr>`;
         tBody.html(msgRow)
+    }
 
+
+    // 定义事件处理函数
+    function doQueryObjects() {
+        doGetObjects();
     }
 
 </script>
