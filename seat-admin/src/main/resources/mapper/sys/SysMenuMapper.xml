@@ -19,5 +19,15 @@
         on c.parentId=p.id
     </select>
 
+    <insert id="insertObject" parameterType="com.chen.pojo.SysMenu">
+        insert into sys_menus
+        (name,url,type,sort,note,parentId,permission,
+         createdTime,modifiedTime,createdUser,modifiedUser)
+        values
+        (#{name},#{url},#{type},#{sort},#{note},#{parentId},#{permission},
+         now(),now(),#{createdUser},#{modifiedUser})
+    </insert>
 
+
+    
 </mapper>

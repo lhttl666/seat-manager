@@ -1,5 +1,6 @@
 package com.chen.service.impl;
 
+import com.chen.common.pojo.Node;
 import com.chen.dao.SysMenuDao;
 import com.chen.pojo.SysMenu;
 import com.chen.service.SysMenuService;
@@ -25,5 +26,27 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public List<SysMenu> findObjects() {
         return sysMenuDao.findObjects();
+    }
+
+    /*
+    * @author GangsterChen
+    * @date 2021/1/26 14:06
+    * @param [entity]
+    * @return [com.chen.pojo.SysMenu]
+    */
+    @Override
+    public int saveObject(SysMenu entity) {
+        return sysMenuDao.insertObject(entity);
+    }
+
+    /*
+    * @author GangsterChen
+    * @date 2021/1/26 18:10
+    * @param []
+    * @return []
+    */
+    @Override
+    public List<Node> findZtreeMenuNodes() {
+        return sysMenuDao.findZtreeMenuNodes();
     }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入CSS-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/treegrid/jquery.treegrid.css"/>
+</head>
+<body>
+<div>
+    <table id="menu-table">
+
+    </table>
+</div>
+<!--引入JS-->
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/treegrid/jquery.treegrid.extension.js"></script>
+<script src="bower_components/treegrid/jquery.treegrid.min.js"></script>
+<script src="bower_components/treegrid/tree.table.js"></script>
+<script>
+    var columns = [
+        {
+            title: '菜单ID',
+            field: 'id',
+            align: 'center',
+            valign: 'middle',
+            width: '80px'
+        },
+        {
+            title: '菜单名称',
+            field: 'name',
+            align: 'center',
+            valign: 'middle',
+            width: '130px'
+        },
+        {
+            title: '上级菜单',
+            field: 'parentName',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+            width: '100px'
+        }];//格式来自官方demos -->treeGrid(jquery扩展的一个网格树插件)
+
+    var table = new TreeTable("menu-table", "/menu/doFindObjects", columns);
+    table.init(); // 底层基于url向服务器发起异步请求
+
+</script>
+</body>
+</html>
