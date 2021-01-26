@@ -32,6 +32,11 @@ public class SysMenuController {
         return new JsonResult("save ok");
     }
 
+    @PutMapping("doUpdateObject")
+    public JsonResult doUpdateObject(@RequestBody SysMenu entity){
+        sysMenuService.updateObject(entity);
+        return new JsonResult("update ok!!");
+    }
 
 
 }

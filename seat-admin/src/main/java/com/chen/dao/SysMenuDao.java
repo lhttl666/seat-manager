@@ -20,4 +20,6 @@ public interface SysMenuDao {
     @Select("select id,name,parentId from sys_menus")
     List<Node> findZtreeMenuNodes();
 
+    int updateObject(SysMenu entity);
+
 }

@@ -24,9 +24,12 @@ public interface SysLogDao {
      * @param startIndex 分页查询条件的起始位置
      * @param pageSize   每页最多多少条记录
      */
-   /* List<SysLog> findPageObjects(
-            @Param("username") String username,
-            @Param("startIndex") Integer startIndex,
-            @Param("pageSize") Integer pageSize);*/
+
+    /*
+     * @author GangsterChen
+     * @date 2021/1/26 21:03
+     * @param [username, startIndex, pageSize]
+     * @return [java.lang.String, java.lang.Integer, java.lang.Integer]
+     */
     List<SysLog> findPageObjects(String username, Integer startIndex, Integer pageSize);
 }

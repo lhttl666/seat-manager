@@ -11,7 +11,8 @@ import java.util.List;
 
 
 @Service
-public class SysMenuServiceImpl implements SysMenuService {
+public class SysMenuServiceImpl implements SysMenuService
+{
     @Autowired
     private SysMenuDao sysMenuDao;
 
@@ -48,5 +49,16 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public List<Node> findZtreeMenuNodes() {
         return sysMenuDao.findZtreeMenuNodes();
+    }
+
+    /*
+    * @author GangsterChen
+    * @date 2021/1/26 20:54
+    * @param [entity]
+    * @return [com.chen.pojo.SysMenu]
+    */
+    @Override
+    public int updateObject(SysMenu entity) {
+        return sysMenuDao.updateObject(entity);
     }
 }

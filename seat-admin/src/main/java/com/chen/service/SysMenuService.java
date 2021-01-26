@@ -12,4 +12,6 @@ public interface SysMenuService {
 
     List<Node> findZtreeMenuNodes();
 
+    int updateObject(SysMenu entity);
+
 }
