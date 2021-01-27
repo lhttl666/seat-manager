@@ -3,6 +3,7 @@ package com.chen.service.impl;
 import com.chen.common.exception.ServiceException;
 import com.chen.common.pojo.PageObject;
 import com.chen.dao.SysRoleDao;
+import com.chen.dao.SysRoleMenuDao;
 import com.chen.pojo.SysRole;
 import com.chen.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     private SysRoleDao sysRoleDao;
+
+    @Autowired
+    private SysRoleMenuDao sysRoleMenuDao;
 
     /*
      * 分页查询方法
@@ -32,5 +36,16 @@ public class SysRoleServiceImpl implements SysRoleService {
         int startIndex = (pageCurrent - 1) * pageSize;
         List<SysRole> records = sysRoleDao.findPageObjects(name, startIndex, pageSize);
         return new PageObject<>(rowCount, records, pageSize, pageCurrent);
+    }
+
+    @Override
+    public int saveObject(SysRole entity, Integer[] menuIds) {
+        // 1.参数校验
+        if (entity ==null || menuIds==null) throw new ServiceException("参数或者id列表不能为空!! SysRoleServiceImpl");
+        // 2.保存角色自身信息
+        int rows = sysRoleDao.insertObject(entity);
+        // 3.保存角色和菜单关系数据
+        sysRoleMenuDao.insertObjects(entity.getId(), menuIds);
+        return rows;
     }
 }

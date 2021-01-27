@@ -14,5 +14,8 @@ public interface SysRoleDao {
 
     List<SysRole> findPageObjects(String name,Integer startIndex, Integer pageSize);
 
+    int insertObject(SysRole entity);
+
+
 
 }

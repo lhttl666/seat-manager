@@ -7,6 +7,7 @@ import com.chen.pojo.SysRole;
 import com.chen.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,12 @@ public class SysRoleController {
     @GetMapping("/doFindPageObjects")
     public JsonResult findPageObject(String name, Integer pageCurrent) {
         return new JsonResult(sysRoleService.findPageObject(name, pageCurrent));
+    }
+
+    @PostMapping("/doSaveObject")
+    public JsonResult doSaveObjects(SysRole entity, Integer[] menuIds) {
+        sysRoleService.saveObject(entity, menuIds);
+        return new JsonResult("role save ok!!");
     }
 
 }
