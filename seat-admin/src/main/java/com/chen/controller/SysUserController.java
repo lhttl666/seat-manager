@@ -25,5 +25,11 @@ public class SysUserController {
         return new JsonResult(pageObjects);
     }
 
+    @RequestMapping("/doValidById")
+    public JsonResult doValidyId(Integer id, Integer valid) {
+        sysUserService.validById(id, valid);
+        return new JsonResult("valid update ok!");
+    }
+
 
 }

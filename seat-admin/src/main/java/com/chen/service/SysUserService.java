@@ -8,5 +8,9 @@ public interface SysUserService {
 
     PageObject<SysUser> findPageObjects(String username, Integer pageCurrent);
 
+    int validById(Integer id, Integer valid);
+
+
+
 
 }

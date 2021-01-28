@@ -3,6 +3,7 @@ package com.chen.dao;
 
 import com.chen.pojo.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -11,7 +12,11 @@ public interface SysUserDao {
 
     List<SysUser> findPageObjects(String name);
 
-
+    /**
+     * 禁用用户
+     */
+    @Update("update sys_users set valid=#{valid},modifiedTime=now() where id=#{id}")
+    int validById(Integer id, Integer valid);
 
 
 }
