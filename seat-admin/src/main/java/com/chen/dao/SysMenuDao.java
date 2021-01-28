@@ -3,6 +3,7 @@ package com.chen.dao;
 
 import com.chen.common.pojo.Node;
 import com.chen.pojo.SysMenu;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,5 +22,7 @@ public interface SysMenuDao {
     List<Node> findZtreeMenuNodes();
 
     int updateObject(SysMenu entity);
+
+
 
 }

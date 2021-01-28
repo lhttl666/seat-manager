@@ -74,6 +74,14 @@ public class SysRoleServiceImpl implements SysRoleService {
         return roleMenu;
 
 
+    }
 
+    @Override
+    public int updateObject(SysRole entity, Integer[] menuIdS) {
+        int rows = sysRoleDao.updateObject(entity);
+        if (rows==0) throw new ServiceException("该记录可能不存在!! SysRoleServiceImpl-updateObject");
+        sysRoleMenuDao.deleteObjectsByRoleId(entity.getId());
+        sysRoleMenuDao.insertObjects(entity.getId(), menuIdS);
+        return rows;
     }
 }

@@ -14,6 +14,7 @@ public interface SysRoleService {
     /**基于id查询角色和角色对应菜单id*/
     SysRoleMenu findById(Integer id);
 
+    int updateObject(SysRole entity, Integer[] menuIdS);
 
 
 }

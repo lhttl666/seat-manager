@@ -61,4 +61,13 @@
         </collection>
     </resultMap>
 
+    <update id="updateObject">
+        update sys_roles
+        set name=#{name},
+            note=#{note},
+            modifiedTime=now(),
+            modifiedUser=#{modifiedUser}
+        where id=#{id}
+    </update>
+
 </mapper>

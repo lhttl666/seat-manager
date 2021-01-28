@@ -20,5 +20,6 @@ public interface SysRoleDao {
     /**role添加页面中id查询方法*/
     SysRoleMenu findById(Integer id);
 
+    int updateObject(SysRole entity);
 
 }
