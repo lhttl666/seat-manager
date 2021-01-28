@@ -12,7 +12,7 @@
             </if>
         </where>
     </sql>
-    
+
     <!--统计总记录个数-->
     <select id="getRowCount" resultType="int">
         select count(*)
@@ -32,9 +32,33 @@
     <!--keyProperty 把自增的主键值(id)赋值给SysRole这个属性-->
     <insert id="insertObject" parameterType="com.chen.pojo.SysRole" keyProperty="id" useGeneratedKeys="true">
         insert into sys_roles
-        (name, note, createdTime, modifiedTime, createdUser, modifiedUser)
-        values
-        (#{name},#{note},now(),now(),#{createdUser},#{modifiedUser})
+            (name, note, createdTime, modifiedTime, createdUser, modifiedUser)
+        values (#{name}, #{note}, now(), now(), #{createdUser}, #{modifiedUser})
     </insert>
-    
+
+    <!--方案1 多次单表查询-->
+<!--    <select id="findById" resultType="com.chen.pojo.SysRoleMenu">
+        select id, name, note
+        from sys_roles
+        where id = #{id}
+    </select>-->
+
+    <!--方案2 多表联合查询-->
+    <select id="findById" resultMap="sysRoleMenu">
+        select r.id,r.name,r.note,rm.menu_id
+        from sys_roles r left join sys_role_menus rm
+        on r.id=rm.role_id
+        where r.id=#{id}
+    </select>
+    <!--resultMap元素是mybatis中实现高级查询映射的一个元素,
+    当表中字段名与pojo类中属性不同或多表查询,嵌套查询时,一般使用resultMap元素进行自定义映射-->
+    <resultMap id="sysRoleMenu" type="com.chen.pojo.SysRoleMenu">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="note" column="note"/>
+        <collection property="menuIds" ofType="integer">
+            <result column="menu_id"/>
+        </collection>
+    </resultMap>
+
 </mapper>

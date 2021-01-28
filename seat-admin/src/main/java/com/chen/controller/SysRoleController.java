@@ -6,10 +6,7 @@ import com.chen.common.pojo.PageObject;
 import com.chen.pojo.SysRole;
 import com.chen.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/role/")
@@ -33,6 +30,11 @@ public class SysRoleController {
     public JsonResult doSaveObjects(SysRole entity, Integer[] menuIds) {
         sysRoleService.saveObject(entity, menuIds);
         return new JsonResult("role save ok!!");
+    }
+
+    @GetMapping("/doFindById/{id}")
+    public JsonResult doFindById(@PathVariable Integer id) {
+        return new JsonResult(sysRoleService.findById(id));
     }
 
 }

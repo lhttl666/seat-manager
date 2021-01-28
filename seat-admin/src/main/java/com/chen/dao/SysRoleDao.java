@@ -2,6 +2,7 @@ package com.chen.dao;
 
 
 import com.chen.pojo.SysRole;
+import com.chen.pojo.SysRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +17,8 @@ public interface SysRoleDao {
 
     int insertObject(SysRole entity);
 
+    /**role添加页面中id查询方法*/
+    SysRoleMenu findById(Integer id);
 
 
 }

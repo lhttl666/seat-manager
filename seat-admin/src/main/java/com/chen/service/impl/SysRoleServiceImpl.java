@@ -5,6 +5,7 @@ import com.chen.common.pojo.PageObject;
 import com.chen.dao.SysRoleDao;
 import com.chen.dao.SysRoleMenuDao;
 import com.chen.pojo.SysRole;
+import com.chen.pojo.SysRoleMenu;
 import com.chen.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +42,38 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public int saveObject(SysRole entity, Integer[] menuIds) {
         // 1.参数校验
-        if (entity ==null || menuIds==null) throw new ServiceException("参数或者id列表不能为空!! SysRoleServiceImpl");
+        if (entity == null || menuIds == null) throw new ServiceException("参数或者id列表不能为空!! SysRoleServiceImpl");
         // 2.保存角色自身信息
         int rows = sysRoleDao.insertObject(entity);
         // 3.保存角色和菜单关系数据
         sysRoleMenuDao.insertObjects(entity.getId(), menuIds);
         return rows;
+    }
+
+    /*
+     * 基于id查询角色和角色对应菜单id
+     * @author GangsterChen
+     * @date 2021/1/28 13:32
+     * @param [id]
+     * @return [java.lang.Integer]
+     */
+    @Override
+    public SysRoleMenu findById(Integer id) {
+        /*方案 1 */
+       /* if (id == null || id < 1) throw new ServiceException("id值不正确!!SysRoleServiceImpl-SysRoleMenu");
+        SysRoleMenu roleMenu = sysRoleDao.findById(id);
+        if (roleMenu == null) throw new ServiceException("记录可能已经不存在! SysRoleServiceImpl-SysRoleMenu");
+        List<Integer> meunIds = sysRoleMenuDao.findMenuIdsByRoleIds(id);
+        roleMenu.setMenuIds(meunIds);
+        return roleMenu;*/
+
+        /*方案2*/
+        if (id == null || id < 1) throw new ServiceException("id值不正确!!SysRoleServiceImpl-SysRoleMenu");
+        SysRoleMenu roleMenu = sysRoleDao.findById(id);
+        if (roleMenu == null) throw new ServiceException("记录可能已经不存在! SysRoleServiceImpl-SysRoleMenu");
+        return roleMenu;
+
+
+
     }
 }
