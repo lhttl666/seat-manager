@@ -1,6 +1,7 @@
 package com.chen.service.impl;
 
 import com.chen.common.exception.ServiceException;
+import com.chen.common.pojo.CheckBox;
 import com.chen.common.pojo.PageObject;
 import com.chen.dao.SysRoleDao;
 import com.chen.dao.SysRoleMenuDao;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl implements SysRoleService
+{
 
     @Autowired
     private SysRoleDao sysRoleDao;
@@ -83,5 +85,17 @@ public class SysRoleServiceImpl implements SysRoleService {
         sysRoleMenuDao.deleteObjectsByRoleId(entity.getId());
         sysRoleMenuDao.insertObjects(entity.getId(), menuIdS);
         return rows;
+    }
+
+    /*
+    * 用户添加页面显示角色列表
+    * @author GangsterChen
+    * @date 2021/1/29 12:31
+    * @param []
+    * @return []
+    */
+    @Override
+    public List<CheckBox> findRoles() {
+        return sysRoleDao.findRoles();
     }
 }

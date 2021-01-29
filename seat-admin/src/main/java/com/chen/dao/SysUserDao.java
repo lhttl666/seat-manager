@@ -18,5 +18,9 @@ public interface SysUserDao {
     @Update("update sys_users set valid=#{valid},modifiedTime=now() where id=#{id}")
     int validById(Integer id, Integer valid);
 
+    /* 用户添加自身信息方法 */
+    int insertObject(SysUser entity);
+
+
 
 }

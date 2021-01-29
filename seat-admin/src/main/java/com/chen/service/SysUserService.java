@@ -10,7 +10,7 @@ public interface SysUserService {
 
     int validById(Integer id, Integer valid);
 
-
+    int saveObject(SysUser entity, Integer[] roleIds);
 
 
 }

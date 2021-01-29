@@ -1,5 +1,6 @@
 package com.chen.service;
 
+import com.chen.common.pojo.CheckBox;
 import com.chen.common.pojo.PageObject;
 import com.chen.pojo.SysRole;
 import com.chen.pojo.SysRoleMenu;
@@ -15,6 +16,8 @@ public interface SysRoleService {
     SysRoleMenu findById(Integer id);
 
     int updateObject(SysRole entity, Integer[] menuIdS);
+
+    List<CheckBox> findRoles();
 
 
 }

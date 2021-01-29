@@ -4,13 +4,12 @@ package com.chen.controller;
 import com.chen.common.pojo.JsonResult;
 import com.chen.common.pojo.PageObject;
 import com.chen.dao.SysUserDao;
+import com.chen.pojo.SysRole;
 import com.chen.pojo.SysUser;
 import com.chen.service.SysUserService;
 import com.sun.org.apache.bcel.internal.generic.JSR;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/")
@@ -25,10 +24,17 @@ public class SysUserController {
         return new JsonResult(pageObjects);
     }
 
-    @RequestMapping("/doValidById")
-    public JsonResult doValidyId(Integer id, Integer valid) {
+    @RequestMapping("/doValidById/{id}/{valid}")
+    public JsonResult doValidyId(@PathVariable Integer id,
+                                 @PathVariable Integer valid) {
         sysUserService.validById(id, valid);
         return new JsonResult("valid update ok!");
+    }
+
+    @PostMapping("/doSaveObject")
+    public JsonResult doSaveObject(SysUser entity, Integer[] roleIds) {
+        sysUserService.saveObject(entity, roleIds);
+        return new JsonResult("save ok!!");
     }
 
 

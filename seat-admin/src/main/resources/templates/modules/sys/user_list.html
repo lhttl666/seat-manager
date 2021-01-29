@@ -102,25 +102,26 @@
    //禁用和启用操作
    function doValidById(){
 	   //params
-	   var rowData=$(this).parents("tr").data("rowData");
-	   var id=rowData.id;
-	   var newValid=rowData.valid?0:1;
-	   var params={"id":rowData.id,"valid":newValid};
+	   let rowData=$(this).parents("tr").data("rowData");
+	   let id=rowData.id;
+	   let newValid=rowData.valid?0:1;
 	   //url
-	   var url="user/doValidById";
+	   let url=`user/doValidById/${id}/${newValid}`;
 	   //ajax request
-       var btn=$(this);//获取点击的button对象
-	   $.post(url,params,function(result){
-    	   if(result.state==1){
-    		   alert(result.message);
-    		   //doGetObjects();//重新查询刷新
-    		   //优化方式实现(局部刷新:修改button显示,修改td内容显示)
-    		   doEditRow(btn,rowData.valid);
-    	   }else{
-    		   alert(result.message);
-    	   }
-       })    
-   }    
+	   let btn=$(this);//获取点击的button对象
+	   $.ajax({
+		   url:url,
+		   method:"put",
+		   success(result){
+			   if(result.state==1){
+				   alert(result.message);
+				   doEditRow(btn,rowData.valid);
+			   }else{
+				   alert(result.message);
+			   }
+		   }
+	   })
+   }
    function doEditRow(obj,valid){
 	   //1.修改按钮上的内容
 	   $(obj).html(valid?"启用":"禁用");
