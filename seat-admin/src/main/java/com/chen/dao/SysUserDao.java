@@ -21,6 +21,8 @@ public interface SysUserDao {
     /* 用户添加自身信息方法 */
     int insertObject(SysUser entity);
 
+    SysUser findById(Integer id);
+
 
 
 }

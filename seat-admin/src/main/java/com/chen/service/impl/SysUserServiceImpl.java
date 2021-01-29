@@ -12,7 +12,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -75,5 +77,23 @@ public class SysUserServiceImpl implements SysUserService {
         int rows = sysUserDao.insertObject(entity);
         sysUserRoleDao.insertObjects(entity.getId(), roleIds);
         return rows;
+    }
+
+    /*
+    * 基于用户ID查询用户相关信息的方法实现
+    * @author GangsterChen
+    * @date 2021/1/29 20:59
+    * @param [id]
+    * @return [java.lang.Integer]
+    */
+    @Override
+    public Map<String, Object> findById(Integer id) {
+        SysUser user = sysUserDao.findById(id);
+        if (user==null)throw new ServiceException("该用户可能已经不存在!!");
+        List<Integer> roleIds = sysUserRoleDao.findRoleIdsByUserId(id);
+        Map<String,Object> map =new HashMap<String,Object>();
+        map.put("user", user);  //key 要与客户端取值方式一致
+        map.put("roleIds", roleIds);
+        return map;
     }
 }

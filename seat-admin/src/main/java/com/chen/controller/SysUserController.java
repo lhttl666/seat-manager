@@ -37,5 +37,10 @@ public class SysUserController {
         return new JsonResult("save ok!!");
     }
 
+    @GetMapping("/doFindById/{id}")
+    public JsonResult doFindById(@PathVariable Integer id) {
+        return new JsonResult(sysUserService.findById(id));
+    }
+
 
 }

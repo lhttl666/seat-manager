@@ -75,12 +75,10 @@
 	   }
    }
    function doFindObjectById(id,title){
-	   //1.params
-	   var params={"id":id};
 	   //2.url
-	   var url="user/doFindObjectById";
+	   let url=`user/doFindById/${id}`;
 	   //3.ajax request
-	   $.getJSON(url,params,function(result){//JsonResult
+	   $.get(url,function(result){//JsonResult
 		   if(result.state==1){
 			  $("#mainContentId").data("rowData",result.data); 
 	          doLoadPage(title);

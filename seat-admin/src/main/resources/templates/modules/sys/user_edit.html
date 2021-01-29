@@ -189,8 +189,8 @@
 	 console.log(data);
 	 //初始化用户信息 
 	 $("#usernameId").val(data.user.username);
-	 $("#deptId").val(data.user.sysDept?data.user.sysDept.name:'');
-	 $("#deptId").data("deptId",data.user.sysDept?data.user.sysDept.id:'');
+	 $("#deptId").val(data.user.deptName);
+	 $("#deptId").data("deptId",data.user.deptName);
 	 $("#emailId").val(data.user.email);
 	 $("#phoneId").val(data.user.mobile);
 	 //初始化用户角色信息

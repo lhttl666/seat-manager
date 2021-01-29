@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysRoleServiceImpl implements SysRoleService
-{
+public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     private SysRoleDao sysRoleDao;
@@ -81,19 +80,19 @@ public class SysRoleServiceImpl implements SysRoleService
     @Override
     public int updateObject(SysRole entity, Integer[] menuIdS) {
         int rows = sysRoleDao.updateObject(entity);
-        if (rows==0) throw new ServiceException("该记录可能不存在!! SysRoleServiceImpl-updateObject");
+        if (rows == 0) throw new ServiceException("该记录可能不存在!! SysRoleServiceImpl-updateObject");
         sysRoleMenuDao.deleteObjectsByRoleId(entity.getId());
         sysRoleMenuDao.insertObjects(entity.getId(), menuIdS);
         return rows;
     }
 
     /*
-    * 用户添加页面显示角色列表
-    * @author GangsterChen
-    * @date 2021/1/29 12:31
-    * @param []
-    * @return []
-    */
+     * 用户添加页面显示角色列表
+     * @author GangsterChen
+     * @date 2021/1/29 12:31
+     * @param []
+     * @return []
+     */
     @Override
     public List<CheckBox> findRoles() {
         return sysRoleDao.findRoles();
