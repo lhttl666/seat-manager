@@ -4,8 +4,6 @@ import com.chen.common.annotation.RequiredLog;
 import com.chen.common.util.IPUtils;
 import com.chen.pojo.SysLog;
 import com.chen.service.SysLogService;
-import com.chen.service.SysUserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -91,8 +89,12 @@ public class SysLogAspect {
         sysLog.setParams(params);
         sysLog.setTime(time);
         // 3.存储用户信息日志到数据库
-        sysLogService.saveObject(sysLog);
-
+        new Thread() {
+            @Override
+            public void run() {
+                sysLogService.saveObject(sysLog);
+            }
+        }.start();
     }
 
 

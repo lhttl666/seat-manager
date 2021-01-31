@@ -38,7 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @RequiredLog("日志分页查询")
     public PageObject<SysUser> findPageObjects(String username, Integer pageCurrent) {
-        int pageSize = 5;
+        int pageSize = 8;
         Page<SysUser> page = PageHelper.startPage(pageCurrent, pageSize);
         List<SysUser> records = sysUserDao.findPageObjects(username);
         return new PageObject<>((int) page.getTotal(), records, pageSize, pageCurrent);
