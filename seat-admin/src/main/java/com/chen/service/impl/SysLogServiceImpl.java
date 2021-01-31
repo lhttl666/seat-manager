@@ -30,4 +30,12 @@ public class SysLogServiceImpl implements SysLogService {
         //4.封装查询结果
         return new PageObject<>(rowCount, records, pageSize, pageCurrent);
     }
+
+    @Override
+    public void saveObject(SysLog entity) {
+        sysLogDao.insertObject(entity);
+
+    }
+
+
 }

@@ -13,4 +13,9 @@ public interface SysLogService {
     * @return 封装分页查询结果
     */
     PageObject<SysLog> findPageObjects(String username, Integer pageCurrent);
+
+    void saveObject(SysLog entity);
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.chen.service.impl;
 
+import com.chen.common.annotation.RequiredLog;
 import com.chen.common.exception.ServiceException;
 import com.chen.common.pojo.PageObject;
 import com.chen.dao.SysUserDao;
@@ -7,8 +8,8 @@ import com.chen.dao.SysUserRoleDao;
 import com.chen.pojo.SysUser;
 import com.chen.service.SysUserService;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @return [java.lang.String, java.lang.Integer]
      */
     @Override
+    @RequiredLog("日志分页查询")
     public PageObject<SysUser> findPageObjects(String username, Integer pageCurrent) {
         int pageSize = 5;
         Page<SysUser> page = PageHelper.startPage(pageCurrent, pageSize);
@@ -80,20 +82,40 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     /*
-    * 基于用户ID查询用户相关信息的方法实现
-    * @author GangsterChen
-    * @date 2021/1/29 20:59
-    * @param [id]
-    * @return [java.lang.Integer]
-    */
+     * 基于用户ID查询用户相关信息的方法实现
+     * @author GangsterChen
+     * @date 2021/1/29 20:59
+     * @param [id]
+     * @return [java.lang.Integer]
+     */
     @Override
     public Map<String, Object> findById(Integer id) {
         SysUser user = sysUserDao.findById(id);
-        if (user==null)throw new ServiceException("该用户可能已经不存在!!");
+        if (user == null) throw new ServiceException("该用户可能已经不存在!!");
         List<Integer> roleIds = sysUserRoleDao.findRoleIdsByUserId(id);
-        Map<String,Object> map =new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("user", user);  //key 要与客户端取值方式一致
         map.put("roleIds", roleIds);
         return map;
+    }
+
+    /*
+     * 角色页面修改用户以及用户角色关系数据方法的实现
+     * @author GangsterChen
+     * @date 2021/1/30 11:49
+     * @param [entity, roleIds]
+     * @return [com.chen.pojo.SysUser, java.lang.Integer[]]
+     */
+    @Override
+    public int updateObject(SysUser entity, Integer[] roleIds) {
+        // 1.参数校验
+        if (roleIds == null) throw new ServiceException("该记录可能不存在!  SysUserServiceImpl-updateObject");
+        // 2.更新用户自身信息
+        int rows = sysUserDao.updateObject(entity);
+        if (rows == 0) throw new ServiceException("该记录可能不存在!  SysUserServiceImpl-updateObject");
+        // 3.更新用户和角色关系数据
+        sysUserRoleDao.deleteObjectsByUserId(entity.getId());
+        sysUserRoleDao.insertObjects(entity.getId(), roleIds);
+        return rows;
     }
 }

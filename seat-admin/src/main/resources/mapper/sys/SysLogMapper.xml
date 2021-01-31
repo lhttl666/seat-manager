@@ -27,4 +27,12 @@
         order by createdTime desc
         limit #{startIndex}, #{pageSize}
     </select>
+
+    <insert id="insertObject">
+        insert into sys_logs
+            (username, ip, operation, method, params, time, createdTime)
+        values (#{username}, #{ip}, #{operation}, #{method}, #{params}, #{time}, now())
+    </insert>
+
+
 </mapper>

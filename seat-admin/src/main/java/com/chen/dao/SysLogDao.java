@@ -32,4 +32,9 @@ public interface SysLogDao {
      * @return [java.lang.String, java.lang.Integer, java.lang.Integer]
      */
     List<SysLog> findPageObjects(String username, Integer startIndex, Integer pageSize);
+
+    int insertObject(SysLog entity);
+
+
+
 }

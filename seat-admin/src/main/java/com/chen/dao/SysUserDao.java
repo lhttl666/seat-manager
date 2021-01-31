@@ -23,6 +23,8 @@ public interface SysUserDao {
 
     SysUser findById(Integer id);
 
+    int updateObject(SysUser entity);
+
 
 
 }

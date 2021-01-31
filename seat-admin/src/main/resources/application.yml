@@ -9,8 +9,10 @@ spring:
   thymeleaf:
     cache: false
     prefix: classpath:/templates/modules/
-
-
+  aop:
+    proxy-target-class: false
+  main:
+    banner-mode: OFF
 
 mybatis:
   mapper-locations: classpath:/mapper/*/*.xml
@@ -18,3 +20,5 @@ mybatis:
 logging:
   level:
     com.chen: debug
+#shiro:
+  #loginUrl: /login.html
