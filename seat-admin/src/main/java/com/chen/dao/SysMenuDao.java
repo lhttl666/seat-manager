@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface SysMenuDao {
@@ -23,6 +24,10 @@ public interface SysMenuDao {
 
     int updateObject(SysMenu entity);
 
+    /**
+     * 查询用户权限
+     */
+    Set<String> findUserPermissions(Integer userId);
 
 
 }

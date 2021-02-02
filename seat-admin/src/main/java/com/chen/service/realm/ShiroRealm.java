@@ -26,29 +26,23 @@ public class ShiroRealm extends AuthorizingRealm {
      * 此方法负责获取并封装授权信息
      */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(
-            PrincipalCollection principalCollection) {
-        /*//1.获取登录用户(登录时传入的用户身份是谁)
-        SysUser user= (SysUser) principalCollection.getPrimaryPrincipal();
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //1.获取登录用户(登录时传入的用户身份是谁)
+        SysUser user = (SysUser) principalCollection.getPrimaryPrincipal();
         //2.基于登录用户id获取用户权限标识
-        Set<String> stringPermissions=
-                sysMenuDao.findUserPermissions(user.getId());
+        Set<String> stringPermissions = sysMenuDao.findUserPermissions(user.getId());
         //3.封装数据并返回
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setStringPermissions(stringPermissions);
-        return info;*/
-
-
-        return null;
+        return info;
     }
 
     /**
      * 此方法负责获取并封装认证信息
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(
-            AuthenticationToken authenticationToken) throws AuthenticationException {
-       /* //1.获取用户提交的认证用户信息
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        //1.获取用户提交的认证用户信息
         UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
         String username = upToken.getUsername();
         //2.基于用户名查询从数据库用户信息
@@ -58,22 +52,13 @@ public class ShiroRealm extends AuthorizingRealm {
         //4.判断用户是否被禁用
         if (sysUser.getValid() == 0) throw new LockedAccountException();
         //5.封装认证信息并返回
-        ByteSource credentialsSalt =
-                ByteSource.Util.bytes(sysUser.getSalt());
-        SimpleAuthenticationInfo info =
-                new SimpleAuthenticationInfo(
-                        sysUser, //principal 传入的用户身份
-                        sysUser.getPassword(),//hashedCredentials
-                        credentialsSalt,//credentialsSalt
-                        getName());
-                                return info;
-
-                        */
-
-
-
-
-        return null;
+        ByteSource credentialsSalt = ByteSource.Util.bytes(sysUser.getSalt());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
+                sysUser, //principal 传入的用户身份
+                sysUser.getPassword(),//hashedCredentials
+                credentialsSalt,//credentialsSalt
+                getName());
+        return info;
     }
 
     @Override

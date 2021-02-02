@@ -8,6 +8,9 @@ import com.chen.pojo.SysRole;
 import com.chen.pojo.SysUser;
 import com.chen.service.SysUserService;
 import com.sun.org.apache.bcel.internal.generic.JSR;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +50,15 @@ public class SysUserController {
         sysUserService.updateObject(entity, roleIds);
         return new JsonResult("update ok!!");
     }
+
+    @RequestMapping("/doLogin")
+    public JsonResult doLogin(String username, String password) {
+        // 将账号密码封装到token对象
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.login(token);
+        return new JsonResult("login ok!");
+    }
+
 
 }

@@ -86,6 +86,7 @@
 		}//json 格式javascript对象
 	}
  }//json 格式的javascript对象
+
  $(document).ready(function(){
 	 //页面加载完成以后加载角色信息并初始化页面
 	  doLoadRoles();
@@ -132,6 +133,7 @@
 	$("#mainContentId").removeData("rowData");
 	$("#mainContentId").load("user/user_list");
  }
+
  function doSaveOrUpdate(){
 	 var rowData=$("#mainContentId").data("rowData");
 	 //1.获取表单数据

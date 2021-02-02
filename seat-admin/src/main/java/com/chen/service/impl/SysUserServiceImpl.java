@@ -8,10 +8,15 @@ import com.chen.dao.SysUserRoleDao;
 import com.chen.pojo.SysUser;
 import com.chen.service.SysUserService;
 import com.github.pagehelper.Page;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +24,12 @@ import java.util.Map;
 import java.util.UUID;
 
 
+@Transactional(
+        readOnly = false,
+        rollbackFor = Throwable.class,
+        isolation = Isolation.READ_COMMITTED,
+        timeout = 5,
+        propagation = Propagation.REQUIRED)
 @Service
 public class SysUserServiceImpl implements SysUserService {
 
@@ -46,12 +57,14 @@ public class SysUserServiceImpl implements SysUserService {
 
     /*
      * 禁用/启用用户
+     * @RequiresPermissions 切入点方法,在执行时,需要判定用户是否有访问此方法的权限
      * @author GangsterChen
      * @date 2021/1/28 20:01
      * @param [id, valid]
      * @return [java.lang.Integer, java.lang.Integer]
      */
     @Override
+    @RequiresPermissions("sys:user:update")
     public int validById(Integer id, Integer valid) {
         int row = sysUserDao.validById(id, valid);
         if (row == 0) throw new ServiceException("该记录可能不存在! SysUserServiceImpl-validById");
@@ -88,6 +101,8 @@ public class SysUserServiceImpl implements SysUserService {
      * @param [id]
      * @return [java.lang.Integer]
      */
+    //
+    @Transactional(readOnly = true)
     @Override
     public Map<String, Object> findById(Integer id) {
         SysUser user = sysUserDao.findById(id);

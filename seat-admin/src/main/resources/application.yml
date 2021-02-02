@@ -13,12 +13,19 @@ spring:
     proxy-target-class: false
   main:
     banner-mode: OFF
-
+  task:
+    execution:
+      pool:
+        core-size: 3
+        max-size: 256
+        keep-alive: 60000
+        queue-capacity: 256
+      thread-name-prefix: seat-service-task-
 mybatis:
   mapper-locations: classpath:/mapper/*/*.xml
 
 logging:
   level:
     com.chen: debug
-#shiro:
-  #loginUrl: /login.html
+shiro:
+  loginUrl: /login.html

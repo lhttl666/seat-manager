@@ -6,18 +6,18 @@
 
     <!--基于条件查询总记录数-->
     <select id="findObjects" resultType="com.chen.pojo.SysMenu">
-        select c.*,p.name parentName
-        from sys_menus c left join sys_menus p
-        on c.parentId=p.id
+        select c.*, p.name parentName
+        from sys_menus c
+                 left join sys_menus p
+                           on c.parentId = p.id
     </select>
 
     <insert id="insertObject" parameterType="com.chen.pojo.SysMenu">
         insert into sys_menus
-        (name,url,type,sort,note,parentId,permission,
-         createdTime,modifiedTime,createdUser,modifiedUser)
-        values
-        (#{name},#{url},#{type},#{sort},#{note},#{parentId},#{permission},
-         now(),now(),#{createdUser},#{modifiedUser})
+        (name, url, type, sort, note, parentId, permission,
+         createdTime, modifiedTime, createdUser, modifiedUser)
+        values (#{name}, #{url}, #{type}, #{sort}, #{note}, #{parentId}, #{permission},
+                now(), now(), #{createdUser}, #{modifiedUser})
     </insert>
 
     <update id="updateObject" parameterType="com.chen.pojo.SysMenu">
@@ -30,10 +30,19 @@
             permission=#{permission},
             modifiedTime=now(),
             modifiedUser=#{modifiedUser}
-        where id=#{id}
+        where id = #{id}
     </update>
 
+    <select id="findUserPermissions" resultType="string">
+        select distinct permission
+        from sys_user_roles ur
+                 join sys_role_menus rm
+                 join sys_menus m
+                      on ur.role_id = rm.role_id and rm.menu_id = m.id
+        where ur.user_id = #{userId}
+          and m.permission is not null
+          and trim(m.permission)!=''
+    </select>
 
 
-    
 </mapper>

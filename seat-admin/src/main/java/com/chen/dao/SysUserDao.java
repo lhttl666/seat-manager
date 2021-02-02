@@ -3,6 +3,7 @@ package com.chen.dao;
 
 import com.chen.pojo.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public interface SysUserDao {
 
     int updateObject(SysUser entity);
 
-
+    @Select("select * from sys_users where username=#{username}")
+    SysUser findUserByUsername(String username);
 
 }
