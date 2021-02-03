@@ -44,5 +44,32 @@
           and trim(m.permission)!=''
     </select>
 
+    <select id="findUserMenus" resultMap="sysUserMenu">
+        select p.id, p.name, p.url, c.id cid, c.name cname, c.url curl
+        from sys_menus p
+                 left join sys_menus c
+                           on p.id = c.parentId
+        where p.parentId is null
+          and c.id in (
+            select rm.menu_id
+            from sys_user_roles ur
+                     join sys_role_menus rm
+                          on ur.role_id = rm.role_id
+            where ur.user_id = #{userId}
+        )
+    </select>
+
+    <resultMap id="sysUserMenu" type="com.chen.pojo.SysUserMenu">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="url" column="url"/>
+        <collection property="childMenus" ofType="com.chen.pojo.SysUserMenu">
+            <id property="id" column="cid"/>
+            <result property="name" column="cname"/>
+            <result property="url" column="curl"/>
+        </collection>
+
+    </resultMap>
+
 
 </mapper>
