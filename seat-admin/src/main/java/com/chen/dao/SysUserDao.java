@@ -29,4 +29,7 @@ public interface SysUserDao {
     @Select("select * from sys_users where username=#{username}")
     SysUser findUserByUsername(String username);
 
+    int updatePassword(String password, String salt, Integer id);
+
+
 }

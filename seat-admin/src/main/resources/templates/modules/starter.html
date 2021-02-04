@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>动吧 | Starter</title>
+    <title>冷山集的图书馆座位管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -64,9 +64,9 @@ desired effect
         <!-- Logo -->
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">动吧旅游</span>
+            <span class="logo-mini">图书馆座位管理系统</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">动吧旅游</span>
+            <span class="logo-lg">图书馆座位管理系统</span>
         </a>
 
         <!-- Header Navbar -->
@@ -250,7 +250,7 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
+                <li class="header">-菜单栏-</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="treeview" th:each="p:${userMenus}">
                     <a href="#"><i class="fa fa-link"></i>
@@ -278,8 +278,8 @@ desired effect
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+               冷山集图书馆座位管理系统
+                <small>万般皆下品 惟有读书高</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -299,10 +299,10 @@ desired effect
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+            Just Do It !
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Author:ChenHao &copy; 2021/2/3 <a href="#">Class:Software1707</a>  </strong> Student ID:1711650703
     </footer>
 
     <!-- Control Sidebar -->
@@ -413,6 +413,7 @@ desired effect
         doLoadUI("load-dept-id", "dept/dept_list");
         doLoadUI("load-user-id", "user/user_list");
         doLoadUI("load-pwd-id", "user/pwd_edit");
+        doLoadUI("load-user-info", "user/info_list");
     });
 
     function doLoadUI(id, url) {

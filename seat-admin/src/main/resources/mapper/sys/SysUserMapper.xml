@@ -32,7 +32,7 @@
                            on u.deptId = d.id
         where u.id = #{id}
     </select>
-    
+
     <update id="updateObject" parameterType="com.chen.pojo.SysUser">
         update sys_users
         set username=#{username},
@@ -41,9 +41,16 @@
             email=#{email},
             modifiedTime=now(),
             modifiedUser=#{modifiedUser}
-        where id=#{id}
+        where id = #{id}
     </update>
 
+    <update id="updatePassword">
+        update sys_users
+        set password=#{password},
+            salt=#{salt},
+            modifiedTime=now()
+            where id = #{id}
+    </update>
 </mapper>
 
 

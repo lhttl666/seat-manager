@@ -18,4 +18,8 @@ public interface SysUserService {
 
     int updateObject(SysUser entity, Integer[] roleIds);
 
+    int updatePassword(String password, String newPassword, String cfgPassword);
+
+    SysUser findUserInfoById(Integer id);
+
 }

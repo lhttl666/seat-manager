@@ -22,6 +22,8 @@ public class SysUser implements Serializable {
     private Date modifiedTime;
     private String createdUser;
     private String modifiedUser;
+    private String sex;
+    private Date birthday;
 
 
 }

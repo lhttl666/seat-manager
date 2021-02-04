@@ -60,5 +60,15 @@ public class SysUserController {
         return new JsonResult("login ok!");
     }
 
+    @RequestMapping("doUpdatePassword")
+    public JsonResult doUpdatePassword(String pwd, String newPwd, String cfgPwd) {
+        sysUserService.updatePassword(pwd, newPwd, cfgPwd);
+        return new JsonResult("update ok");
+    }
+
+    @RequestMapping("/doFindUserInfo/{id}")
+    public JsonResult doFindUserInfo(@PathVariable Integer id){
+        return new JsonResult(sysUserService.findUserInfoById(id));
+    }
 
 }
