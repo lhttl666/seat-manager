@@ -7,7 +7,8 @@
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 350px;">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default do-update" onclick="doLoadEditUI()">修改信息</button>
+                            <button type="button" class="btn btn-default do-update" onclick="doLoadEditUI()">修改信息
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -115,8 +116,8 @@
     function doCreateTds(row) {
         var tds = "<td>" + row.id + "</td>" +
             "<td>" + row.username + "</td>" +
-            "<td>" + row.sex + "</td>" +
-            "<td>" + (row.birthday ? row.birthday : '未设置') + "</td>" +
+            "<td>" + (row.sex ? row.sex : '未设置') + "</td>" +
+            "<td>" + (row.birthday ? row.birthday.substr(0, 10) : '未设置') + "</td>" +
             "<td>" + (row.deptName ? row.deptName : '未分配') + "</td>" +
             "<td>" + row.email + "</td>" +
             "<td>" + row.mobile + "</td>" +
