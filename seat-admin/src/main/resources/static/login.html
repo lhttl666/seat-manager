@@ -29,6 +29,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
+    <div id="userData"></div>
     <a href="#"><b>图书馆座位-</b>管理系统</a>
   </div>
   <!-- /.login-logo -->
@@ -96,6 +97,7 @@
 		  if(result.state==1){
 			//跳转到indexUI对应的页面
 			location.href="doIndexUI?t="+Math.random();
+			$("#userData").data("userData", result.data);
 		  }else{
 			$(".login-box-msg").html(result.message); 
 		  }

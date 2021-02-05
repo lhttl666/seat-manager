@@ -19,8 +19,10 @@ import java.util.Set;
 public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private SysUserDao sysUserDao;
+
     @Autowired
     private SysMenuDao sysMenuDao;
+
 
     /**
      * 此方法负责获取并封装授权信息

@@ -14,6 +14,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/user/")
 public class SysUserController {
@@ -67,8 +69,19 @@ public class SysUserController {
     }
 
     @RequestMapping("/doFindUserInfo/{id}")
-    public JsonResult doFindUserInfo(@PathVariable Integer id){
+    public JsonResult doFindUserInfo(@PathVariable Integer id) {
         return new JsonResult(sysUserService.findUserInfoById(id));
     }
+
+    // 获取当前用户的数据
+    @RequestMapping("/doFindCurrentUserId")
+    public String doFindCurrentUserId() {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+       /* HashMap<String, Integer> map = new HashMap<>();
+        map.put("id", user.getId());
+        System.out.println(map);*/
+        return user.getId().toString();
+    }
+
 
 }

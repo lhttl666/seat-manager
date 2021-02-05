@@ -7,7 +7,7 @@
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 350px;">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-update">修改</button>
+                            <button type="button" class="btn btn-default do-update" onclick="doLoadEditUI()">修改信息</button>
                         </div>
                     </div>
                 </div>
@@ -38,14 +38,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#tbodyId").load(doGetObjects());
-
-        // 注册修改按钮点击事件
-        $(".input-group-btn")
-            .on("click", ".btn-update", doLoadEditUI);
     });
 
     function doLoadEditUI() {
-        let title = "修改用户";
+        console.log("doLoadEditUI()")
+        let title = "修改您的个人信息";
+        let id = getCurrentUserData();
         //基于id进行查询并加载编辑页面
         doFindObjectById(id, title);
     }
@@ -71,7 +69,8 @@
 
     //页面加载完成异步加载当前页数据
     function doGetObjects() {
-        let id = 1;
+        var id = getCurrentUserData();
+        console.log("当前用户id=" + id);
         let url = `user/doFindUserInfo/${id}`;
         $.ajax({
             url,
@@ -81,10 +80,20 @@
         });
     }
 
+    function getCurrentUserData() {
+        var id;
+        $.ajax({
+            url: "user/doFindCurrentUserId",
+            async: false,
+            success: function (result) {
+                id = result;
+            }
+        })
+        return id;
+    }
+
     function doHandleResponseResult(result) {
         if (result.state == 1) {
-            console.log(result.data)
-            console.log("=========================")
             doSetTableBodyRows(result.data);
         } else {
             alert(result.message);
@@ -104,7 +113,6 @@
     }
 
     function doCreateTds(row) {
-        console.log("row=" + row);
         var tds = "<td>" + row.id + "</td>" +
             "<td>" + row.username + "</td>" +
             "<td>" + row.sex + "</td>" +
