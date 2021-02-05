@@ -17,17 +17,19 @@
             </div>
 
             <div class="form-group">
-                <label for="emailId" class="col-sm-2 control-label">性别</label>
+                <label class="col-sm-2 control-label">性别</label>
                 <div class="col-sm-10">
-                    <input type="radio" value="1" name="sex" checked="checked" title="男">男</input>&nbsp;
-                    <input type="radio" value="0" name="sex" checked="checked" title="女">女</input>
+                    <input type="radio" value="1" name="sex" title="男">男</input>&nbsp;
+                    <input type="radio" value="0" name="sex" title="女">女</input>
+                    <!--//取radio的值
+                        $("input[name='radioName'][checked]").val();-->
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="emailId" class="col-sm-2 control-label">生日</label>
+                <label for="birthday" class="col-sm-2 control-label">生日</label>
                 <div class="col-sm-10">
-                    <input type="date">
+                    <input type="date" id="birthday">
                 </div>
             </div>
 
@@ -52,7 +54,9 @@
         </div>
         <!-- /.box-footer -->
     </form>
-    <div class="layui-layer layui-layer-page layui-layer-molv layer-anim" id="treeLayer" type="page" times="2" showtime="0" contype="object" style="z-index:59891016; width: 300px; height: 450px; top: 100px; left: 500px; display:none">
+    <div class="layui-layer layui-layer-page layui-layer-molv layer-anim" id="treeLayer" type="page" times="2"
+         showtime="0" contype="object"
+         style="z-index:59891016; width: 300px; height: 450px; top: 100px; left: 500px; display:none">
         <span class="layui-layer-setwin"> <a
                 class="layui-layer-ico layui-layer-close layui-layer-close1 btn-cancel"></a></span>
         <div class="layui-layer-btn layui-layer-btn-">
@@ -67,20 +71,13 @@
 
     $(document).ready(function () {
         //页面加载完成以后加载角色信息并初始化页面
-        doLoadRoles();
+        getUserData();
         //事件注册
         $(".box-footer")
             .on("click", ".btn-cancel", doCancel)
-            .on("click", ".btn-save", doSaveOrUpdate);
-
-
-        $(".form-horizontal")
-            .on("click", ".load-sys-dept", doLoadZTreeNodes);
+            .on("click", ".btn-save", doUpdate);
     });
 
-    function doHideTree() {
-        $("#treeLayer").css("display", "none");
-    }
 
     //确定按钮
     function doConfirm() {
@@ -95,24 +92,50 @@
         doHideTree();
     }
 
-    function doLoadZTreeNodes() {
-        var url = "dept/doFindZTreeNodes";
-        $("#treeLayer").css("display", "block");
-        $.getJSON(url, function (result) {
-            if (result.state == 1) {
-                zTree = $.fn.zTree.init($("#zTreeId"), setting, result.data);
-            } else {
-                alert(result.message);
-            }
-        });
+    function showUserData() {
+        let data = getUserData();
+
     }
 
+    // 取消按钮逻辑 -已完成
     function doCancel() {
-        $("#mainContentId").removeData("rowData");
         $("#mainContentId").load("user/info_list");
     }
 
-    function doSaveOrUpdate() {
+    // 获取当前登录的用户对象- 已完成
+    function getUserData() {
+        let id = getCurrentUserData();
+        let username, sex, birthday, email, mobile;
+        $.ajax({
+            url: `user/doShowUserInfo/${id}`,
+            async: false,
+            success(result) {
+                username = result.username;
+                sex = result.sex;
+                birthday = result.birthday.substr(0, 10);
+                email = result.email;
+                mobile = result.mobile;
+            }
+        })
+        console.log("data=" + username + sex + birthday + email + mobile);
+        $("#usernameId").val(username);
+        setSex(sex);
+        $("#birthday").val(birthday);
+        $("#emailId").val(email);
+        $("#phoneId").val(mobile);
+        return userData;
+    }
+
+    // 根据查询到的性别决定选择哪个框
+    function setSex(sex) {
+        if (sex == "男") {
+            $("input[name='sex'][value='1']").attr("checked", true);
+        } else {
+            $("input[name='radioName'][value='0']").attr("checked", true);
+        }
+    }
+
+    function doUpdate() {
         var rowData = $("#mainContentId").data("rowData");
         //1.获取表单数据
         var params = doGetEditFormData();
@@ -132,14 +155,15 @@
         })
     }
 
+
     function doGetEditFormData() {
         //获取用户输入的数据
         var params = {
             username: $("#usernameId").val(),
-            password: $("#passwordId").val(),
+            sex: $('input:radio[name="sex"]:checked').val(),
+            birthday: $("#birthday").val(),
             email: $("#emailId").val(),
             mobile: $("#phoneId").val(),
-            deptId: $("#deptId").data("deptId")
         }
         //获取选择的角色
         var roleIds = new Array();
@@ -153,27 +177,15 @@
         return params;
     }
 
-    function doLoadRoles() {
-        var url = "role/doFindRoles"
-        $.getJSON(url, function (result) {
-            if (result.state == 1) {
-                doInitPageRoles(result.data);
-                doInitFormData();//修改时
-            } else {
-                alert(result.message);
-            }
-        })
-    }
 
     function doInitFormData() {
-        var data = $("#mainContentId").data("rowData");
-        if (!data) return;
-        $("#pwdDiv").remove();
+        var data = getUserData()
+        if (!data) alert("该用户信息查询错误!");
         console.log(data);
         //初始化用户信息
         $("#usernameId").val(data.user.username);
-        $("#deptId").val(data.user.deptName);
-        $("#deptId").data("deptId", data.user.deptName);
+        // 性别怎么显示>?        $("#sex").val(data.user.deptName);
+        $("#birthday").data("deptId", data.user.deptName);
         $("#emailId").val(data.user.email);
         $("#phoneId").val(data.user.mobile);
         //初始化用户角色信息
@@ -184,20 +196,7 @@
         }
     }
 
-    function doInitPageRoles(data) {//List<CheckBox>
-        //1.获取角色要显示的位置对象
-        var div = $("#rolesId");
-        div.empty();
-        //2.迭代数据，将数据追加到div
-        var input = "<input type='checkbox' name='roleId' value='[id]'>[name]"
-        for (var i in data) {
-            //记住每次replace时都会产生一个新的字符串对象
-            var newInput =
-                input.replace("[id]", data[i].id)
-                    .replace("[name]", data[i].name);
-            div.append(newInput)
-        }
-    }
+
 </script>
     
     

@@ -73,13 +73,22 @@ public class SysUserController {
         return new JsonResult(sysUserService.findUserInfoById(id));
     }
 
+    @RequestMapping("/doShowUserInfo/{id}")
+    public HashMap<String, Object> doShowUserInfo(@PathVariable Integer id){
+        SysUser user = sysUserService.findUserInfoById(id);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", user.getUsername());
+        map.put("sex", user.getSex());
+        map.put("birthday", user.getBirthday());
+        map.put("email", user.getEmail());
+        map.put("mobile", user.getMobile());
+        return map;
+    }
+
     // 获取当前用户的数据
     @RequestMapping("/doFindCurrentUserId")
     public String doFindCurrentUserId() {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-       /* HashMap<String, Integer> map = new HashMap<>();
-        map.put("id", user.getId());
-        System.out.println(map);*/
         return user.getId().toString();
     }
 
