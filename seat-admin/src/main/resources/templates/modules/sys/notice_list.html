@@ -56,16 +56,17 @@
             .on("click", ".btn-update", doLoadEditUI)
     });
 
+    var currentId;
+
     function doLoadEditUI() {
         var title;
         if ($(this).hasClass('btn-add')) {
-            console.log("if ($(this).hasClass('btn-add')) {")
             title = "添加新公告";
             doLoadPageUI(title);
         } else {
-            console.log("   } else {")
             title = "修改公告"
-            let id = $(this).parents("tr").data("id");
+            var id = $(this).parents("tr").data("id");
+            currentId = id;
             let url = `notice/doFindById/${id}`;
             $.get(url, function (result) {
                 if (result.state == 1) {
@@ -79,6 +80,15 @@
         }
     }
 
+    function getCurrentId() {
+        if (currentId != null && currentId != '') {
+            var id = currentId;
+            return id
+        }else {
+            console.log("id已被清空!");
+        }
+    }
+
     function doLoadPageUI(title) {
         var url = "notice/notice_edit"
         $("#mainContentId")
@@ -86,6 +96,7 @@
                 $(".box-title").html(title);
             })
     }
+
 
     function doDeleteObject() {
         //1.params
@@ -178,14 +189,19 @@
 
     function doCreateTds(row) {
         var tds =
-            "<td>" + row.id + "</td>" +
+            "<td >" + row.id + "</td>" +
             "<td>" + row.title + "</td>" +
             "<td>" + row.content + "</td>" +
             "<td>" + new Date(row.createdTime).toLocaleString() + "</td>" +
             "<td>" + new Date(row.modifiedTime).toLocaleString() + "</td>" +
             "<td>" + row.modifiedUser + "</td>" +
-            "<td><button type='button' class='btn-delete'>delete</button>" +
-            "&nbsp;<button type='button' class='btn-update'>update</a></td>";
+            "<td> " +
+            "<button type='button' class='btn-delete'>delete</button>" +
+            "&nbsp;" +
+            "<button type='button' class='btn-update'>update</button>" +
+            "</td>";
         return tds;
     }
+
+
 </script>
