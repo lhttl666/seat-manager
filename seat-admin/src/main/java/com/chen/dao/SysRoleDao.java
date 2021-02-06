@@ -27,4 +27,6 @@ public interface SysRoleDao {
     @Select("select id,name from sys_roles")
     List<CheckBox> findRoles();
 
+
+
 }
