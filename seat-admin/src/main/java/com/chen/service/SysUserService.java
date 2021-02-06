@@ -22,4 +22,6 @@ public interface SysUserService {
 
     SysUser findUserInfoById(Integer id);
 
+    int updateUserInfo(Integer id, SysUser entity);
+
 }

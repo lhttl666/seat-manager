@@ -169,4 +169,21 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUser findUserInfoById(Integer id) {
         return sysUserDao.findById(id);
     }
+
+    /*
+     * 基于ID修改用户个人信息(自己改自己)
+     * @author GangsterChen
+     * @date 2021/2/6 10:02
+     * @param [id]
+     * @return [java.lang.Integer]
+     */
+    @Override
+    public int updateUserInfo(Integer id, SysUser entity) {
+        String username = entity.getUsername();
+        String sex =entity.getSex();
+        String bithday =entity.getBirthday();
+        String email =entity.getEmail();
+        String mobile =entity.getMobile();
+        return sysUserDao.updateUserInfo(id, username, sex, bithday, email, mobile);
+    }
 }

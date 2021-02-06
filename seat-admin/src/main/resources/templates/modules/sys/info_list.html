@@ -38,7 +38,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#tbodyId").load(doGetObjects());
+        $("#tbodyId").load(doGetUserInfoObjects());
     });
 
     function doLoadEditUI() {
@@ -69,7 +69,7 @@
     }
 
     //页面加载完成异步加载当前页数据
-    function doGetObjects() {
+    function doGetUserInfoObjects() {
         var id = getCurrentUserData();
         console.log("当前用户id=" + id);
         let url = `user/doFindUserInfo/${id}`;

@@ -74,7 +74,7 @@ public class SysUserController {
     }
 
     @RequestMapping("/doShowUserInfo/{id}")
-    public HashMap<String, Object> doShowUserInfo(@PathVariable Integer id){
+    public HashMap<String, Object> doShowUserInfo(@PathVariable Integer id) {
         SysUser user = sysUserService.findUserInfoById(id);
         HashMap<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
@@ -92,5 +92,10 @@ public class SysUserController {
         return user.getId().toString();
     }
 
+    @RequestMapping("/doUpdateUserInfo/{id}")
+    public JsonResult doUpdateUserInfo(@PathVariable Integer id, SysUser entity) {
+        sysUserService.updateUserInfo(id, entity);
+        return new JsonResult("info update ok!");
+    }
 
 }

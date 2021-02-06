@@ -3,6 +3,7 @@ package com.chen.dao;
 
 import com.chen.pojo.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -30,6 +31,13 @@ public interface SysUserDao {
     SysUser findUserByUsername(String username);
 
     int updatePassword(String password, String salt, Integer id);
+
+    int updateUserInfo(@Param("id") Integer id,
+                       @Param("username") String username,
+                       @Param("sex") String sex,
+                       @Param("birthday") String birthday,
+                       @Param("email") String email,
+                       @Param("mobile") String mobile);
 
 
 }

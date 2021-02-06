@@ -49,7 +49,18 @@
         set password=#{password},
             salt=#{salt},
             modifiedTime=now()
-            where id = #{id}
+        where id = #{id}
+    </update>
+
+    <update id="updateUserInfo">
+        update sys_users
+        set username=#{username},
+            email=#{email},
+            mobile=#{mobile},
+            sex=#{sex},
+            birthday=#{birthday},
+            modifiedTime=now()
+        where id = #{id}
     </update>
 </mapper>
 

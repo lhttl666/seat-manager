@@ -19,8 +19,8 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">性别</label>
                 <div class="col-sm-10">
-                    <input type="radio" value="1" name="sex" checked="checked" title="男">男</input>&nbsp;
-                    <input type="radio" value="0" name="sex" title="女">女</input>
+                    <input type="radio" value="男" name="sex" title="男">男</input>&nbsp;
+                    <input type="radio" value="女" name="sex" title="女">女</input>
                     <!--//取radio的值
                         $("input[name='radioName'][checked]").val();-->
                 </div>
@@ -49,8 +49,8 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="button" class="btn btn-default btn-cancel">取消</button>
-            <button type="button" class="btn btn-info pull-right btn-save">保存</button>
+            <button type="button" onclick="doCancel()" class="btn btn-default btn-cancel">取消</button>
+            <button type="button" onclick="doUpdate()" class="btn btn-info pull-right btn-save">保存</button>
         </div>
         <!-- /.box-footer -->
     </form>
@@ -72,30 +72,7 @@
     $(document).ready(function () {
         //页面加载完成以后加载角色信息并初始化页面
         getUserData();
-        //事件注册
-        $(".box-footer")
-            .on("click", ".btn-cancel", doCancel)
-            .on("click", ".btn-save", doUpdate);
     });
-
-
-    //确定按钮
-    function doConfirm() {
-        //1.获取选中的记录(id,name);
-        var selectedNodes = zTree.getSelectedNodes();
-        var node = selectedNodes[0];
-        //2.将id和name填写或绑定在具体对象上
-        $("#deptId").val(node.name);
-        console.log("node.id=" + node.id)
-        $("#deptId").data("deptId", node.id)
-        //3.隐藏zTree对应的Div
-        doHideTree();
-    }
-
-    function showUserData() {
-        let data = getUserData();
-
-    }
 
     // 取消按钮逻辑 -已完成
     function doCancel() {
@@ -128,23 +105,20 @@
     // 根据查询到的性别决定选择哪个框
     function setSex(sex) {
         if (sex == "男") {
-            $("input[name='sex'][value='1']").attr("checked", true);
+            $("input[name='sex'][value='男']").attr("checked", true);
         } else {
-            $("input[name='radioName'][value='0']").attr("checked", true);
+            $("input[name='sex'][value='女']").attr("checked", true);
         }
     }
 
     function doUpdate() {
-        var rowData = $("#mainContentId").data("rowData");
         //1.获取表单数据
-        var params = doGetEditFormData();
-        if (rowData) params.id = rowData.user.id;
+        let params = doGetEditFormData();
+        let id = getCurrentUserData();
         //2.发起异步请求
-        var insertUrl = "user/doSaveObject";
-        var updateUrl = "user/doUpdateObject";
-        var url = rowData ? updateUrl : insertUrl;
+        var updateUrl = `user/doUpdateUserInfo/${id}`;
         console.log(params);
-        $.post(url, params, function (result) {
+        $.post(updateUrl, params, function (result) {
             if (result.state == 1) {
                 alert(result.message);
                 doCancel();
@@ -152,9 +126,11 @@
                 alert(result.message);
             }
         })
+        doGetUserInfoObjects();
     }
 
 
+    // 获取表单当前的数据
     function doGetEditFormData() {
         //获取用户输入的数据
         var params = {
@@ -164,35 +140,7 @@
             email: $("#emailId").val(),
             mobile: $("#phoneId").val(),
         }
-        //获取选择的角色
-        var roleIds = new Array();
-        $("#rolesId input[name='roleId']")
-            .each(function () {
-                if ($(this).prop("checked")) {
-                    roleIds.push($(this).val());
-                }
-            });
-        params.roleIds = roleIds.toString();
         return params;
-    }
-
-
-    function doInitFormData() {
-        var data = getUserData()
-        if (!data) alert("该用户信息查询错误!");
-        console.log(data);
-        //初始化用户信息
-        $("#usernameId").val(data.user.username);
-        // 性别怎么显示>?        $("#sex").val(data.user.deptName);
-        $("#birthday").data("deptId", data.user.deptName);
-        $("#emailId").val(data.user.email);
-        $("#phoneId").val(data.user.mobile);
-        //初始化用户角色信息
-        var ids = data.roleIds;
-        for (var i in ids) {
-            $("#rolesId input[value='" + ids[i] + "']")
-                .prop("checked", true);
-        }
     }
 
 

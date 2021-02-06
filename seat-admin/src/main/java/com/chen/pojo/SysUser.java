@@ -23,7 +23,7 @@ public class SysUser implements Serializable {
     private String createdUser;
     private String modifiedUser;
     private String sex;
-    private Date birthday;
+    private String birthday;
 
 
 }
