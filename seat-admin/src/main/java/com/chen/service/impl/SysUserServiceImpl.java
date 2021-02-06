@@ -3,6 +3,7 @@ package com.chen.service.impl;
 import com.chen.common.annotation.RequiredLog;
 import com.chen.common.exception.ServiceException;
 import com.chen.common.pojo.PageObject;
+import com.chen.common.util.ISEmail;
 import com.chen.dao.SysUserDao;
 import com.chen.dao.SysUserRoleDao;
 import com.chen.pojo.SysUser;
@@ -179,11 +180,25 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public int updateUserInfo(Integer id, SysUser entity) {
+        List<String> allUserName = sysUserDao.findAllUserName();
+        // 在数组中去除当前登录角色的用户名
+        SysUser Currentuser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        allUserName.remove(Currentuser.getUsername());
+
         String username = entity.getUsername();
-        String sex =entity.getSex();
-        String bithday =entity.getBirthday();
-        String email =entity.getEmail();
-        String mobile =entity.getMobile();
+        String sex = entity.getSex();
+        String bithday = entity.getBirthday();
+        String email = entity.getEmail();
+        String mobile = entity.getMobile();
+        if (username == null) throw new ServiceException("用户名不能为空!");
+        if (bithday == null) throw new ServiceException("请设置生日!");
+        if (email == null) throw new ServiceException("邮箱不能为空!");
+        if (mobile == null) throw new ServiceException("手机号不能为空!");
+        for (String name : allUserName) {
+            if (username.equals(name)) throw new ServiceException("该用户名已被占用!");
+        }
+        if(!ISEmail.isEmail(email)) throw new ServiceException("邮箱格式不合法!");
+        if (mobile.length()!=11 || !mobile.startsWith("1")) throw new ServiceException("手机号格式不正确!");
         return sysUserDao.updateUserInfo(id, username, sex, bithday, email, mobile);
     }
 }

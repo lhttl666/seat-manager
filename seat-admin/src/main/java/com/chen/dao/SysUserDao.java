@@ -39,5 +39,7 @@ public interface SysUserDao {
                        @Param("email") String email,
                        @Param("mobile") String mobile);
 
+    @Select("select username from sys_users")
+    List<String> findAllUserName();
 
 }
