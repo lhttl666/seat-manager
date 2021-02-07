@@ -52,51 +52,87 @@
         });
         $(".input-group-btn")
             .on("click", ".btn-search", doQueryObjects)
-            .on("click", ".btn-add", doLoadEditUI)
+            .on("click", ".btn-add", doLoadAddEditUI)
         $("#tbodyId")
             .on("click", ".btn-delete", doDeleteObject)
-            .on("click", ".btn-update", doLoadEditUI)
+            .on("click", ".btn-update", doLoadUpdateEditUI)
     });
 
     var currentId;
 
-    function doLoadEditUI() {
-        var title;
-        if ($(this).hasClass('btn-add')) {
-            title = "添加新公告";
-            doLoadPageUI(title);
-        } else {
-            title = "修改公告"
-            var id = $(this).parents("tr").data("id");
-            currentId = id;
-            let url = `notice/doFindById/${id}`;
-            $.get(url, function (result) {
-                if (result.state == 1) {
-                    result.data.id = id;//在结果中动态追加id
-                    $("#mainContentId").data("data", result.data);
-                    doLoadPageUI(title);//异步加载页面
-                } else {
-                    alert(result.message);
-                }
-            });
-        }
+    // 加载新增页面
+    function doLoadAddEditUI() {
+        var title = "添加新公告";
+        doLoadAddPageUI(title);
     }
 
+    // 加载更改页面
+    function doLoadUpdateEditUI() {
+        var title = "修改公告"
+        var id = $(this).parents("tr").data("id");
+        currentId = id;
+        let url = `notice/doFindById/${id}`;
+        $.get(url, function (result) {
+            if (result.state == 1) {
+                result.data.id = id;//在结果中动态追加id
+                $("#mainContentId").data("data", result.data);
+                doLoadUpdatePageUI(title);//异步加载页面
+            } else {
+                alert(result.message);
+            }
+        });
+
+    }
+
+
+    // 基于当前ID查询notice对象信息
+    function getCurrentNoticeData() {
+        let id = getCurrentId();
+        let param;
+        $.ajax({
+            url: `notice/doFindById/${id}`,
+            async: false,
+            success(result) {
+                param = result;
+            }
+        });
+        return param;
+    }
+
+    // 完成修改页面的数据回显
+    function showBack() {
+        let param = getCurrentNoticeData();
+        $("#titleId").val(param.data.title);
+        $("#contentId").val(param.data.content);
+    }
+
+    // 获取当前ID
     function getCurrentId() {
         if (currentId != null && currentId != '') {
             var id = currentId;
             return id
-        }else {
+        } else {
             console.log("id已被清空!");
         }
     }
 
-    function doLoadPageUI(title) {
+    function doLoadAddPageUI(title) {
         var url = "notice/notice_edit"
         $("#mainContentId")
             .load(url, function () {
                 $(".box-title").html(title);
-            })
+                $("#titleId").val('')
+                $("#contentId").val('')
+            });
+    }
+
+    function doLoadUpdatePageUI(title) {
+        var url = "notice/notice_edit"
+        $("#mainContentId")
+            .load(url, function () {
+                $(".box-title").html(title);
+                showBack();
+            });
     }
 
 
