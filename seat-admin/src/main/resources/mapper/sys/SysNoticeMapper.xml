@@ -30,11 +30,22 @@
 
     <!--useGeneratedKeys 表示使用自增的主键值-->
     <!--keyProperty 把自增的主键值(id)赋值给SysRole这个属性-->
-    <insert id="insertObject" parameterType="com.chen.pojo.SysNotice" keyProperty="id" useGeneratedKeys="true">
+    <insert id="saveNoticeObject" parameterType="com.chen.pojo.SysNotice" keyProperty="id" useGeneratedKeys="true">
         insert into sys_notices
             (title, content, createdTime, modifiedTime, createdUser)
         values (#{title}, #{content}, now(), now(), #{createdUser})
     </insert>
+
+    <update id="updateNoticeObject">
+        update sys_notices
+        set title=#{title},
+            content=#{content},
+            modifiedTime=now(),
+            modifiedUser=#{modifiedUser}
+        where id=#{id}
+    </update>
+
+
 
     <!--方案1 多次单表查询-->
 <!--    <select id="findById" resultType="com.chen.pojo.SysRoleMenu">

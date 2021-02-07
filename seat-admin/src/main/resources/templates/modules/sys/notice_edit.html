@@ -37,26 +37,17 @@
         //异步加载菜单信息,初始化页面菜单
         showBack();
 
-
         $(".box-footer")
             .on("click", ".btn-save", doSaveOrUpdate)
             .on("click", ".btn-cancel", doCancel);
 
     });
 
-    function doInitEditFormData(data) {
-        console.log("data", data);
-        //1.初始化角色自身信息
-        $("#nameId").val(data.name);
-        $("#noteId").val(data.note);
-
-    }
 
 
     // 基于当前ID查询notice对象信息
     function getCurrentNoticeData() {
         let id = getCurrentId();
-        console.log("id=" + id);
         let param;
         $.ajax({
             url: `notice/doFindById/${id}`,
@@ -65,7 +56,6 @@
                 param = result;
             }
         });
-        console.log("param=" + param.data.content)
         return param;
     }
 
@@ -98,8 +88,8 @@
         var data = $("#mainContentId").data("data");
         if (data) params.id = data.id;
         //2.url
-        var insertUrl = "notice/doSaveObject";
-        var updateUrl = "notice/doUpdateObject";
+        var insertUrl = "notice/doSaveNotice";
+        var updateUrl = "notice/doUpdateNotice";
         var url = data ? updateUrl : insertUrl;
         //3.ajax request
         $.post(url, params, function (result) {
@@ -115,7 +105,7 @@
     function doGetEditFormData() {
         //1.获取角色自身信息
         var params = {
-            title: $("#TitleId").val(),
+            title: $("#titleId").val(),
             content: $("#contentId").val()
         }
         return params;

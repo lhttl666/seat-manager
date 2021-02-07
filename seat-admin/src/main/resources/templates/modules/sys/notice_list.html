@@ -27,8 +27,10 @@
                             <th>标题</th>
                             <th>内容</th>
                             <th>创建人</th>
+                            <th>最近修改人</th>
                             <th>最新修改时间</th>
                             <th>创建时间</th>
+
                         </tr>
                         </thead>
                         <tbody id="tbodyId">
@@ -189,12 +191,13 @@
 
     function doCreateTds(row) {
         var tds =
-            "<td >" + row.id + "</td>" +
+            "<td>" + row.id + "</td>" +
             "<td>" + row.title + "</td>" +
             "<td>" + row.content + "</td>" +
-            "<td>" + new Date(row.createdTime).toLocaleString() + "</td>" +
-            "<td>" + new Date(row.modifiedTime).toLocaleString() + "</td>" +
+            "<td>" + row.createdUser + "</td>" +
             "<td>" + row.modifiedUser + "</td>" +
+            "<td>" + new Date(row.modifiedTime).toLocaleString() + "</td>" +
+            "<td>" + new Date(row.createdTime).toLocaleString() + "</td>" +
             "<td> " +
             "<button type='button' class='btn-delete'>delete</button>" +
             "&nbsp;" +

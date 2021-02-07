@@ -43,4 +43,14 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     public int doDeleteObject(Integer id) {
         return sysNoticeDao.doDeleteObject(id);
     }
+
+    @Override
+    public int updateNoticeObject(SysNotice entity) {
+        return sysNoticeDao.updateNoticeObject(entity);
+    }
+
+    @Override
+    public int saveNoticeObject(SysNotice entity) {
+        return sysNoticeDao.saveNoticeObject(entity);
+    }
 }

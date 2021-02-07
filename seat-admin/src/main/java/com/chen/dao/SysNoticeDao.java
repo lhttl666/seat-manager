@@ -1,6 +1,7 @@
 package com.chen.dao;
 
 import com.chen.pojo.SysNotice;
+import com.chen.pojo.SysRole;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,12 +19,14 @@ public interface SysNoticeDao {
 
     List<SysNotice> findPageObjects(String name, Integer startIndex, Integer pageSize);
 
-    int insertObject(SysNotice entity);
+    int saveNoticeObject(SysNotice entity);
 
     @Select("select * from sys_notices where id=#{id}")
     SysNotice findById(Integer id);
 
     @Delete("delete from sys_notices where id=#{id}")
     int doDeleteObject(Integer id);
+
+    int updateNoticeObject(SysNotice entity);
 
 }

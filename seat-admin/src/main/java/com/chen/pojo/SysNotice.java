@@ -14,6 +14,7 @@ public class SysNotice implements Serializable {
     private Date createdTime;
     private Date modifiedTime;
     private String createdUser;
+    private String modifiedUser;
 
 
 }

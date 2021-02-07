@@ -4,6 +4,7 @@ package com.chen.controller;
 import com.chen.common.pojo.JsonResult;
 import com.chen.dao.SysNoticeDao;
 import com.chen.pojo.SysNotice;
+import com.chen.pojo.SysUser;
 import com.chen.service.SysNoticeService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,22 @@ public class SysNoticeController {
         return new JsonResult("delete ok!");
     }
 
-    @RequestMapping("/currentNotice")
-    public HashMap getCurrentNotice() {
-        SysNotice notice = (SysNotice) SecurityUtils.getSubject().getPrincipal();
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("id", notice.getId());
-        map.put("title", notice.getTitle());
-        map.put("content", notice.getContent());
-        System.out.println(map);
-        return map;
+
+    @RequestMapping("/doUpdateNotice")
+    public JsonResult doUpdateNotice(SysNotice entity) {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        entity.setModifiedUser(user.getUsername());
+        sysNoticeService.updateNoticeObject(entity);
+        return new JsonResult("update ok!");
     }
 
+
+    @RequestMapping("/doSaveNotice")
+    public JsonResult doSaveNotice(SysNotice entity) {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        entity.setCreatedUser(user.getUsername());
+        sysNoticeService.saveNoticeObject(entity);
+        return new JsonResult("新公告保存成功!");
+    }
 
 }

@@ -12,4 +12,9 @@ public interface SysNoticeService {
     SysNotice findById(Integer id);
 
     int doDeleteObject(Integer id);
+
+    int updateNoticeObject(SysNotice entity);
+
+    int saveNoticeObject(SysNotice entity);
+
 }
