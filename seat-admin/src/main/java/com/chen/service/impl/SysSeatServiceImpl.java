@@ -34,4 +34,9 @@ public class SysSeatServiceImpl implements SysSeatService {
     public int updateObject(SysSeat entity) {
         return sysSeatDao.updateObject(entity);
     }
+
+    @Override
+    public int doDeleteObject(SysSeat entity) {
+        return sysSeatDao.deleteObject(entity);
+    }
 }

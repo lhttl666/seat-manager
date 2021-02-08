@@ -5,6 +5,7 @@ import com.chen.common.pojo.SeatNode;
 import com.chen.pojo.SysMenu;
 import com.chen.pojo.SysSeat;
 import com.chen.pojo.SysUserMenu;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,10 +19,11 @@ public interface SysSeatDao {
 
     int insertObject(SysSeat entity);
 
-    @Select("select id,area,floor from sys_seats")
+    @Select("select id,name,parentId from sys_seats")
     List<SeatNode> findZtreeMenuNodes();
 
     int updateObject(SysSeat entity);
 
-
+    @Delete("delete from sys_seats where id=#{id}")
+    int deleteObject(SysSeat entity);
 }

@@ -13,4 +13,6 @@ public interface SysSeatService {
     List<SeatNode> findZtreeMenuNodes();
 
     int updateObject(SysSeat entity);
+
+    int doDeleteObject(SysSeat entity);
 }

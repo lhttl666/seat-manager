@@ -76,10 +76,10 @@
             valign: 'middle',
             width: '70px',
             formatter: function (item, index) {
-                if (item.type == 1) {
+                if (item.state == 1) {
                     return '<span class="label label-success">空闲中</span>';
                 }
-                if (item.type == 2) {
+                if (item.state == 2) {
                     return '<span class="label label-warning">已占用</span>';
                 }
             }

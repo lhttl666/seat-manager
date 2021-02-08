@@ -24,7 +24,6 @@ public class SysSeatController {
     @GetMapping("doFindObjects")
     public JsonResult doFindObjects() {
         List<SysSeat> list = sysSeatService.findObjects();
-        System.out.println(list);
         return new JsonResult(list);
     }
 
@@ -40,5 +39,10 @@ public class SysSeatController {
         return new JsonResult("update ok!!");
     }
 
+    @RequestMapping("doDeleteObject")
+    public JsonResult doDeleteObject(SysSeat entity){
+        sysSeatService.doDeleteObject(entity);
+        return new JsonResult("删除成功!");
+    }
 
 }

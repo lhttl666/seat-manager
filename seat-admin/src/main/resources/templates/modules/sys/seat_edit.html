@@ -11,45 +11,27 @@
                 <label for="nameId" class="col-sm-2 control-label">类型</label>
                 <div class="col-sm-10 typeRadio">
                     <label class="radio-inline">
-                        <input type="radio" name="typeId" value="1" checked> 菜单 </label>
+                        <input type="radio" name="typeId" value="1" checked> 空闲中 </label>
                     <label class="radio-inline">
-                        <input type="radio" name="typeId" value="2"> 按钮 </label>
+                        <input type="radio" name="typeId" value="2"> 已占用 </label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="nameId" class="col-sm-2 control-label">菜单名称</label>
+                <label for="nameId" class="col-sm-2 control-label">区域名</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nameId" placeholder="名称">
+                    <input type="text" class="form-control" id="nameId" placeholder="区域名">
                 </div>
             </div>
             <div class="form-group">
-                <label for="parentId" class="col-sm-2 control-label">上级菜单</label>
+                <label for="parentId" class="col-sm-2 control-label">所处楼层</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control load-sys-menu" readonly="readonly" id="parentId"
-                           placeholder="上级菜单">
+                           placeholder="所处楼层">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="urlId" class="col-sm-2 control-label">菜单URL</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="urlId" placeholder="url">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="permissionId" class="col-sm-2 control-label">授权标识：</label>
-                <div class="col-sm-10">
-                    <input type="text" id="permissionId"
-                           placeholder="多个用逗号分隔，如：user:list,user:create"
-                           class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="sortId" class="col-sm-2 control-label">排序号：</label>
-                <div class="col-sm-10">
-                    <input type="text" id="sortId" placeholder="排序号"
-                           class="form-control">
-                </div>
-            </div>
+
+
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -111,16 +93,8 @@
     })
 
     function doInitEditFormData(data) {
-        /*   $("input[type='radio']").each(function(){
-              if($(this).val()==data.type){
-                  $(this).prop("checked",true);
-              }
-          }) */
-        $(".typeRadio input[value='" + data.type + "']").prop("checked", true);
+        $(".typeRadio input[value='" + data.state + "']").prop("checked", true);
         $("#nameId").val(data.name);
-        $("#sortId").val(data.sort);
-        $("#urlId").val(data.url);
-        $("#permissionId").val(data.permission);
         $("#parentId").val(data.parentName);
         $("#parentId").data("parentId", data.parentId);
     }
@@ -128,11 +102,8 @@
     //获取表单数据
     function doGetEditFormData() {
         var params = {
-            type: $("form input[name='typeId']:checked").val(),
+            state: $("form input[name='typeId']:checked").val(),
             name: $("#nameId").val(),
-            url: $("#urlId").val(),
-            sort: $("#sortId").val(),
-            permission: $("#permissionId").val(),
             parentId: $("#parentId").data("parentId")
         }
         return params;
@@ -145,19 +116,11 @@
         let params = doGetEditFormData();
         let rowData = $("#mainContentId").data("rowData");
         //2.异步提交表单数据(post)
-        let insertUrl = "menu/doSaveObject";
-        let updateUrl = "menu/doUpdateObject";
+        let insertUrl = "seat/doSaveObject";
+        let updateUrl = "seat/doUpdateObject";
         let url = rowData ? updateUrl : insertUrl;
         let requestMethod = rowData ? "put" : "post";
         if (rowData) params.id = rowData.id;
-        /*$.post(url,params,function(result){
-               if(result.state==1){
-                   alert(result.message);
-                   doCancel();
-               }else{
-                   alert(result.message);
-               }
-       });*/
         $.ajax({
             method: requestMethod,
             url: url,
@@ -177,7 +140,7 @@
     //编辑页面cancel事件处理
     function doCancel() {
         //1.定义url
-        var url = "menu/menu_list";
+        var url = "seat/seat_list";
         //2.异步加载列表页面
         $("#mainContentId").load(url);
     }
@@ -220,7 +183,7 @@
     }
 
     function doLoadZtreeNodes() {
-        var url = "menu/doFindZtreeMenuNodes";
+        var url = "seat/doFindZtreeMenuNodes";
         //异步加载数据,并初始化数据
         $.getJSON(url, function (result) {
             if (result.state == 1) {
