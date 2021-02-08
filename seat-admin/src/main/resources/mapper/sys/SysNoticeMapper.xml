@@ -23,7 +23,7 @@
     <select id="findPageObjects" resultType="com.chen.pojo.SysNotice">
         select *
         <include refid="queryWhereId"/>
-        order by createdTime desc
+        order by modifiedTime desc
         limit #{startIndex},#{pageSize}
     </select>
 
@@ -42,43 +42,42 @@
             content=#{content},
             modifiedTime=now(),
             modifiedUser=#{modifiedUser}
-        where id=#{id}
+        where id = #{id}
     </update>
-
 
 
     <!--方案1 多次单表查询-->
-<!--    <select id="findById" resultType="com.chen.pojo.SysRoleMenu">
-        select id, name, note
-        from sys_roles
-        where id = #{id}
-    </select>-->
+    <!--    <select id="findById" resultType="com.chen.pojo.SysRoleMenu">
+            select id, name, note
+            from sys_roles
+            where id = #{id}
+        </select>-->
 
-  <!--  &lt;!&ndash;方案2 多表联合查询&ndash;&gt;
-    <select id="findById" resultMap="sysRoleMenu">
-        select r.id,r.name,r.note,rm.menu_id
-        from sys_roles r left join sys_role_menus rm
-        on r.id=rm.role_id
-        where r.id=#{id}
-    </select>
-    &lt;!&ndash;resultMap元素是mybatis中实现高级查询映射的一个元素,
-    当表中字段名与pojo类中属性不同或多表查询,嵌套查询时,一般使用resultMap元素进行自定义映射&ndash;&gt;
-    <resultMap id="sysRoleMenu" type="com.chen.pojo.SysRoleMenu">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="note" column="note"/>
-        <collection property="menuIds" ofType="integer">
-            <result column="menu_id"/>
-        </collection>
-    </resultMap>
+    <!--  &lt;!&ndash;方案2 多表联合查询&ndash;&gt;
+      <select id="findById" resultMap="sysRoleMenu">
+          select r.id,r.name,r.note,rm.menu_id
+          from sys_roles r left join sys_role_menus rm
+          on r.id=rm.role_id
+          where r.id=#{id}
+      </select>
+      &lt;!&ndash;resultMap元素是mybatis中实现高级查询映射的一个元素,
+      当表中字段名与pojo类中属性不同或多表查询,嵌套查询时,一般使用resultMap元素进行自定义映射&ndash;&gt;
+      <resultMap id="sysRoleMenu" type="com.chen.pojo.SysRoleMenu">
+          <id property="id" column="id"/>
+          <result property="name" column="name"/>
+          <result property="note" column="note"/>
+          <collection property="menuIds" ofType="integer">
+              <result column="menu_id"/>
+          </collection>
+      </resultMap>
 
-    <update id="updateObject">
-        update sys_roles
-        set name=#{name},
-            note=#{note},
-            modifiedTime=now(),
-            modifiedUser=#{modifiedUser}
-        where id=#{id}
-    </update>
--->
+      <update id="updateObject">
+          update sys_roles
+          set name=#{name},
+              note=#{note},
+              modifiedTime=now(),
+              modifiedUser=#{modifiedUser}
+          where id=#{id}
+      </update>
+  -->
 </mapper>
