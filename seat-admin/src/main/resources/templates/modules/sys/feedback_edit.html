@@ -1,0 +1,78 @@
+<!-- Horizontal Form -->
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">意见/建议反馈</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="feedback" class="col-sm-2 control-label">内容:</label>
+
+                <div class="col-sm-10">
+                    <textarea cols="8" rows="15" class="form-control" name="note" id="feedback"
+                              placeholder="请在此输入您的建议或者意见..."/>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-default btn-cancel">取消</button>
+            <button type="button" class="btn btn-info pull-right btn-save">发送</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+<script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        //异步加载菜单信息,初始化页面菜单
+        $(".box-footer")
+            .on("click", ".btn-save", doSaveOrUpdate)
+            .on("click", ".btn-cancel", doCancel);
+
+    });
+
+    function doCancel() {
+        var url = "feedback/feedback_edit";
+        $("#mainContentId")
+            .load(url, function () {
+                $("#mainContentId").removeData();
+            });
+    }
+
+    function doSaveOrUpdate() {
+        //1.参数(表单数据)
+        var params = doGetEditFormData();
+        if (!params.feedback.trim()) {
+            alert("内容不能为空!");
+            return;
+        }
+        $.ajax({
+            url: "feedback/doSaveObject",
+            data: params,
+            method: "post",
+            //contentType: "application/json",
+            success(result) {
+                if (result.state == 1) {
+                    alert(result.message);
+                    doCancel();
+                } else {
+                    alert(result.message);
+                }
+            }
+        })
+    }
+
+    function doGetEditFormData() {
+        //1.获取角色自身信息
+        var params = {
+            feedback: $("#feedback").val()
+        }
+        return params;
+    }
+
+</script>
