@@ -25,6 +25,7 @@
                         <tr>
                             <th>公告ID</th>
                             <th>标题</th>
+                            <th>公告类型</th>
                             <th>内容</th>
                             <th>创建人</th>
                             <th>最近修改人</th>
@@ -229,6 +230,7 @@
         var tds =
             "<td>" + row.id + "</td>" +
             "<td>" + row.title + "</td>" +
+            "<td>" + row.type + "</td>" +
             "<td>" + row.content + "</td>" +
             "<td>" + row.createdUser + "</td>" +
             "<td>" + row.modifiedUser + "</td>" +
@@ -240,6 +242,8 @@
             "<button type='button' class='btn-update'>update</button>" +
             "</td>";
         return tds;
+
+
     }
 
 
