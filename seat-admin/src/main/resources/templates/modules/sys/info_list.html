@@ -61,7 +61,8 @@
     }
 
 
-    function doLoadPage(title) {
+    function doLoadPage() {
+        let title = "意见箱";
         let url = "user/info_edit"
         $("#mainContentId").load(url, function () {
             $(".box-title").html(title);

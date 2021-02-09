@@ -16,9 +16,13 @@ public class SysFeedbackController {
 
     @RequestMapping("/doSaveObject")
     public JsonResult doSaveObject(SysFeedback entity) {
-        System.out.println("entity=" + entity);
         sysFeedbackService.doSaveObject(entity);
         return new JsonResult("反馈成功!");
+    }
+
+    @GetMapping("/doFindPageObjects")
+    public JsonResult doFindPageObjects(String feedback, Integer pageCurrent) {
+        return new JsonResult(sysFeedbackService.findPageObjects(feedback, pageCurrent));
     }
 
 
