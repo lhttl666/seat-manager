@@ -4,6 +4,7 @@ package com.chen.service;
 import com.chen.common.pojo.PageObject;
 import com.chen.pojo.SysUser;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public interface SysUserService {
@@ -23,5 +24,7 @@ public interface SysUserService {
     SysUser findUserInfoById(Integer id);
 
     int updateUserInfo(Integer id, SysUser entity);
+
+    HashMap<String, Object> getCurrentUserData();
 
 }

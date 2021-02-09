@@ -15,4 +15,9 @@ public interface SysSeatService {
     int updateObject(SysSeat entity);
 
     int doDeleteObject(SysSeat entity);
+
+    int reserveSeat(SysSeat entity);
+
+    int returnSeat(SysSeat entity);
+
 }

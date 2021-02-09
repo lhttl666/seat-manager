@@ -154,6 +154,7 @@ public class SysUserServiceImpl implements SysUserService {
         if (StringUtils.isEmpty(password)) throw new IllegalArgumentException("原密码不能为空!");
         //获取登陆用户
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+
         SimpleHash sh = new SimpleHash("MD5", password, user.getSalt(), 1);
         if (!user.getPassword().equals(sh.toHex())) throw new IllegalArgumentException("原密码不正确!");
         //3.对新密码进行加密
@@ -196,8 +197,27 @@ public class SysUserServiceImpl implements SysUserService {
         for (String name : allUserName) {
             if (username.equals(name)) throw new ServiceException("该用户名已被占用!");
         }
-        if(!ISEmail.isEmail(email)) throw new ServiceException("邮箱格式不合法!");
-        if (mobile.length()!=11 || !mobile.startsWith("1")) throw new ServiceException("手机号格式不正确!");
+        if (!ISEmail.isEmail(email)) throw new ServiceException("邮箱格式不合法!");
+        if (mobile.length() != 11 || !mobile.startsWith("1")) throw new ServiceException("手机号格式不正确!");
         return sysUserDao.updateUserInfo(id, username, sex, bithday, email, mobile);
+    }
+
+    @Override
+    public HashMap<String, Object> getCurrentUserData() {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", user.getId());
+        map.put("username", user.getUsername());
+        map.put("password", user.getPassword());
+        map.put("salt", user.getSalt());
+        map.put("sex", user.getSex());
+        map.put("email", user.getEmail());
+        map.put("mobile", user.getMobile());
+        map.put("valid", user.getValid());
+        map.put("createdTime", user.getCreatedTime());
+        map.put("modifieTime", user.getModifiedTime());
+        map.put("createdUser", user.getCreatedUser());
+        map.put("birthday", user.getBirthday());
+        return map;
     }
 }

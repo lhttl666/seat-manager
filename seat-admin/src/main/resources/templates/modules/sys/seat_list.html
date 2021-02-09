@@ -9,9 +9,15 @@
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 100px;">
                         <div class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-reserve">
+                                预定座位
+                            </button>
 
-                            <button type="button"
-                                    class="btn btn-success btn-delete">
+                            <button type="button" class="btn btn-success btn-return">
+                                退订座位
+                            </button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger btn-delete">
                                 删除
                             </button>
                             <button type="button" class="btn btn-default btn-add">添加</button>
@@ -42,6 +48,7 @@
     /**
      * 初始化表格的列
      */
+
     var columns = [
         {
             field: 'selectItem',
@@ -74,7 +81,7 @@
             field: 'state',
             align: 'center',
             valign: 'middle',
-            width: '70px',
+            width: '45px',
             formatter: function (item, index) {
                 if (item.state == 1) {
                     return '<span class="label label-success">空闲中</span>';
@@ -83,7 +90,14 @@
                     return '<span class="label label-warning">已占用</span>';
                 }
             }
-        },{
+        }, {
+            title: '占用用户',
+            field: 'usedUser',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+            width: '100px'
+        }, {
             title: '创建时间',
             field: 'createdTime',
             align: 'center',
@@ -95,8 +109,65 @@
         doGetObjects();
         $(".input-group-btn")
             .on("click", ".btn-delete", doDeleteObject)
-            .on("click", ".btn-add,.btn-update", doLoadEditUI);
+            .on("click", ".btn-add,.btn-update", doLoadEditUI)
+            .on("click", ".btn-reserve", doLoadReserveUI)
+            .on("click", ".btn-return", doLoadReturnUI);
     })
+
+    // 退订页面的显示
+    function doLoadReturnUI(){
+        var title = "您确定要退订该座位吗?"
+        //基于点击对象的class属性值,修改标题
+        var item = doGetCheckedItem();
+        if (!item) {
+            alert("请先选择座位号!");
+            return;
+        }
+        if (item.id == 1 || item.id == 2 || item.id == 3) {
+            alert("不能选择根节点(楼层)！");
+            return;
+        }
+        if (item.state == 1) {
+            alert("您没有预定该座位!");
+            return;
+        }
+        $("#mainContentId")
+            .data("rowData", item);
+
+        //异步加载编辑页面
+        var url = "seat/seat_return";
+        $("#mainContentId").load(url, function () {
+            $(".box-title").html(title);
+        })
+    }
+
+    // 预定页面的显示
+    function doLoadReserveUI() {
+        var title = "您确定要预定该座位吗?"
+        //基于点击对象的class属性值,修改标题
+        var item = doGetCheckedItem();
+        if (!item) {
+            alert("请先选择");
+            return;
+        }
+        if (item.id == 1 || item.id == 2 || item.id == 3) {
+            alert("不能选择根节点(楼层)！");
+            return;
+        }
+        if (item.state == 2) {
+            alert("该座位已经被占用!");
+            return;
+        }
+        $("#mainContentId")
+            .data("rowData", item);
+
+        //异步加载编辑页面
+        var url = "seat/seat_reserve";
+        $("#mainContentId").load(url, function () {
+            $(".box-title").html(title);
+        })
+    }
+
 
     function doLoadEditUI() {
         var title;

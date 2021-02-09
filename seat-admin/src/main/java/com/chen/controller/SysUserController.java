@@ -3,11 +3,8 @@ package com.chen.controller;
 
 import com.chen.common.pojo.JsonResult;
 import com.chen.common.pojo.PageObject;
-import com.chen.dao.SysUserDao;
-import com.chen.pojo.SysRole;
 import com.chen.pojo.SysUser;
 import com.chen.service.SysUserService;
-import com.sun.org.apache.bcel.internal.generic.JSR;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;

@@ -15,5 +15,7 @@ public class SysSeat {
     private Date modifiedTime;
     private String createdUser;
     private String modifiedUser;
+    private String usedUser;
+    private Date lastUsedTime;
 
 }

@@ -14,8 +14,8 @@
 
     <insert id="insertObject" parameterType="com.chen.pojo.SysSeat">
         insert into sys_seats
-        (name, parentId, state, createdTime, modifiedTime, createdUser, modifiedUser)
-        values (#{name}, #{parentId}, #{state}, now(), now(), #{createdUser}, #{modifiedUser})
+        (name, parentId, state, createdTime, modifiedTime, createdUser, modifiedUser, usedUser)
+        values (#{name}, #{parentId}, #{state}, now(), now(), #{createdUser}, #{modifiedUser}, #{usedUser})
     </insert>
 
     <update id="updateObject" parameterType="com.chen.pojo.SysSeat">
@@ -24,10 +24,27 @@
             parentId=#{parentId},
             state=#{state},
             modifiedTime=now(),
-            modifiedUser=#{modifiedUser}
+            modifiedUser=#{modifiedUser} usedUser=#{usedUser}
         where id = #{id}
     </update>
 
+    <update id="reserveSeat" parameterType="com.chen.pojo.SysSeat">
+        update sys_seats
+        set state=#{state},
+            usedUser=#{usedUser},
+            modifiedTime=now(),
+            lastUsedTime=now()
+        where id = #{id}
+    </update>
+
+    <update id="returnSeat" parameterType="com.chen.pojo.SysSeat">
+        update sys_seats
+        set state=#{state},
+            usedUser=null,
+            modifiedTime=now(),
+            lastUsedTime=now()
+        where id = #{id}
+    </update>
 
     <!--
       <resultMap id="sysUserMenu" type="com.chen.pojo.SysUserMenu">

@@ -26,4 +26,9 @@ public interface SysSeatDao {
 
     @Delete("delete from sys_seats where id=#{id}")
     int deleteObject(SysSeat entity);
+
+    int reserveSeat(SysSeat entity);
+
+    int returnSeat(SysSeat entity);
+
 }
