@@ -51,6 +51,8 @@ public class SysNoticeController {
     public JsonResult doSaveNotice(SysNotice entity) {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         entity.setCreatedUser(user.getUsername());
+
+        sysNoticeService.saveNoticeObject(entity);
         return new JsonResult("新公告保存成功!");
     }
 

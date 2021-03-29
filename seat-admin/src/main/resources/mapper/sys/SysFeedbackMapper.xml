@@ -17,7 +17,7 @@
     <insert id="doSaveObject" parameterType="com.chen.pojo.SysFeedback" keyProperty="id" useGeneratedKeys="true">
         insert into sys_feedbacks
             (userId, feedback, time)
-        values (#{userId}, #{feedback}, now())
+        values (#{userId}, #{feedback}, DATE_FORMAT(now(),"%Y-%m-%d %H:%i:%s"))
     </insert>
 
 

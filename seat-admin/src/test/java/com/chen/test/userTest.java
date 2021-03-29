@@ -13,7 +13,8 @@ public class userTest {
 
     @Test
     public void testUser(){
-        sysUserService.getCurrentUserData();
+
+        System.out.println(sysUserService.getCurrentUserData().toString());
     }
 
 }
