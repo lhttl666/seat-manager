@@ -3,7 +3,9 @@ package com.chen.service.aspect;
 import com.chen.common.annotation.RequiredLog;
 import com.chen.common.util.IPUtils;
 import com.chen.pojo.SysLog;
+import com.chen.pojo.SysUser;
 import com.chen.service.SysLogService;
+import com.chen.service.SysUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -56,13 +58,17 @@ public class SysLogAspect {
     @Autowired
     private SysLogService sysLogService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     /**
      * 记录用户行为日志
      */
     private void saveUserLog(ProceedingJoinPoint jp, long time) throws Exception {
         // 1.获取用户行为日志
         // 获取登录用户名(未登录时则给固定值)
-        String username = "chenhaotest1";
+
+        String username = (String) sysUserService.getCurrentUserData().get("username");
         String ip = IPUtils.getIpAddr();  //使用工具类获取本机IP
         // 获取操作 @RequiredLog注解中value属性的值
         // 获取目标对象类型

@@ -67,6 +67,7 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     @RequiresPermissions("sys:user:update")
+    @RequiredLog("修改权限")
     public int validById(Integer id, Integer valid) {
         int row = sysUserDao.validById(id, valid);
         if (row == 0) throw new ServiceException("该记录可能不存在! SysUserServiceImpl-validById");
@@ -106,6 +107,7 @@ public class SysUserServiceImpl implements SysUserService {
     //
     @Transactional(readOnly = true)
     @Override
+    @RequiredLog("查询用户信息")
     public Map<String, Object> findById(Integer id) {
         SysUser user = sysUserDao.findById(id);
         if (user == null) throw new ServiceException("该用户可能已经不存在!!");
@@ -124,6 +126,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @return [com.chen.pojo.SysUser, java.lang.Integer[]]
      */
     @Override
+    @RequiredLog("修改用户信息")
     public int updateObject(SysUser entity, Integer[] roleIds) {
         // 1.参数校验
         if (roleIds == null) throw new ServiceException("该记录可能不存在!  SysUserServiceImpl-updateObject");
@@ -145,6 +148,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @date 2021/2/3 17:55
      */
     @Override
+    @RequiredLog("修改密码")
     public int updatePassword(String password, String newPassword, String cfgPassword) {
         //1.判定新密码与密码确认是否相同
         if (StringUtils.isEmpty(newPassword)) throw new IllegalArgumentException("新密码不能为空!");
@@ -179,6 +183,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @return [java.lang.Integer]
      */
     @Override
+    @RequiredLog("修改自己个人信息")
     public int updateUserInfo(Integer id, SysUser entity) {
         List<String> allUserName = sysUserDao.findAllUserName();
         // 在数组中去除当前登录角色的用户名
