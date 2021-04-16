@@ -1,5 +1,6 @@
 package com.chen.service.impl;
 
+import com.chen.common.annotation.SendEmail;
 import com.chen.common.exception.ServiceException;
 import com.chen.common.pojo.SeatNode;
 import com.chen.dao.SysSeatDao;
@@ -51,6 +52,7 @@ public class SysSeatServiceImpl implements SysSeatService {
     }
 
     @Override
+    @SendEmail(value = "座位预订成功", content = "您的座位已经预订成功！如有突发情况无法按时就座，请您及时退订座位，以避免影响他人正常使用，谢谢！ 有问题联系管理员: 910326532@qq.com")
     public int reserveSeat(SysSeat entity) {
         HashMap<String, Object> userMap = sysUserService.getCurrentUserData();
 

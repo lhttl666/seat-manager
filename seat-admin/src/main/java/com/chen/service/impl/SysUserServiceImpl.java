@@ -1,6 +1,7 @@
 package com.chen.service.impl;
 
 import com.chen.common.annotation.RequiredLog;
+import com.chen.common.annotation.SendEmail;
 import com.chen.common.exception.ServiceException;
 import com.chen.common.pojo.PageObject;
 import com.chen.common.util.ISEmail;
@@ -149,6 +150,8 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     @RequiredLog("修改密码")
+    @SendEmail(value = "修改密码成功！", content = "您的密码已修改成功，如不是本人操作，请及时联系管理员！ 管理员Email：910326532@qq.com")
+
     public int updatePassword(String password, String newPassword, String cfgPassword) {
         //1.判定新密码与密码确认是否相同
         if (StringUtils.isEmpty(newPassword)) throw new IllegalArgumentException("新密码不能为空!");
