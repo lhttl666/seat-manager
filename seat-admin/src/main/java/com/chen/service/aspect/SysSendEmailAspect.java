@@ -6,6 +6,7 @@ import com.chen.common.annotation.SendEmail;
 import com.chen.pojo.SysLog;
 import com.chen.service.SysUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,7 +38,15 @@ public class SysSendEmailAspect {
 
         try {
             Object result = jp.proceed();//执行目标方法(切点方法中的某个方法)
-            doSendEmail(jp);
+            Thread t = new Thread() {
+                @SneakyThrows
+                @Override
+                public void run() {
+                    doSendEmail(jp);
+                }
+            };
+            t.start();
+
             return result;//目标业务方法的执行结果
         } catch (Throwable e) {
             e.printStackTrace();
