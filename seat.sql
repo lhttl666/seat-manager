@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-02-13 16:52:25
+Date: 2021-04-20 13:30:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -18,6 +18,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for sys_depts
 -- ----------------------------
+use seat;
 DROP TABLE IF EXISTS `sys_depts`;
 CREATE TABLE `sys_depts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -30,17 +31,22 @@ CREATE TABLE `sys_depts` (
   `createdUser` varchar(20) DEFAULT NULL COMMENT '创建用户',
   `modifiedUser` varchar(20) DEFAULT NULL COMMENT '修改用户',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_depts
 -- ----------------------------
-INSERT INTO `sys_depts` VALUES ('2', '集团教研部', null, '1', '集团教学和研发', '2018-04-19 18:59:09', '2020-01-12 14:13:22', 'admin', null);
-INSERT INTO `sys_depts` VALUES ('4', '课程研发部', '2', '22', '负责课程研发', '2018-04-22 18:10:58', '2020-01-12 14:13:56', null, null);
-INSERT INTO `sys_depts` VALUES ('5', '集团MIS部', null, '13', '负责集团网络环境运维', '2020-01-12 14:14:26', '2020-01-12 14:14:26', null, null);
-INSERT INTO `sys_depts` VALUES ('6', '市场部', null, '6', 'ccc', '2020-04-28 15:53:23', '2020-04-28 15:54:08', null, null);
-INSERT INTO `sys_depts` VALUES ('7', 'MIS-1部', '5', '5', '111', '2020-04-28 15:53:46', '2020-04-28 15:53:46', null, null);
-INSERT INTO `sys_depts` VALUES ('9', 'test3', '6', '16', 'test2', '2021-01-28 18:03:42', '2021-01-31 19:16:22', null, null);
+INSERT INTO `sys_depts` VALUES ('2', '图书馆方', null, '1', '负责图书馆内的事务运营', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('4', '安保处', '2', '22', '负责馆内的秩序', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('5', '校方', null, '13', '负责对图书馆的督查和政策指引', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('6', '学生方', null, '6', '核心用户', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('7', '校财务部', '5', '5', '负责对馆在校内开销的结算', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('9', '保洁处', '2', '16', '负责馆内场地的保洁', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('10', '客服处', '2', '17', '负责馆内问题的答疑和引导', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('11', '校方督察部', '5', '18', '负责定期对馆内各项指标进行检查', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('12', '本科部', '6', '19', '大学1-4年级的学生选择此部门', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('13', '研究生部', '6', '20', '研究生1-3年级的学生选择此部门', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
+INSERT INTO `sys_depts` VALUES ('14', '博士部', '6', '21', '研究生及以上的学生选择此部门', '2020-01-12 14:13:22', '2020-01-12 14:13:22', 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for sys_feedbacks
@@ -52,7 +58,7 @@ CREATE TABLE `sys_feedbacks` (
   `feedback` varchar(500) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_feedbacks
@@ -61,6 +67,15 @@ INSERT INTO `sys_feedbacks` VALUES ('1', '2', 'hello', '2021-02-09 14:08:08');
 INSERT INTO `sys_feedbacks` VALUES ('3', '1', 'aaa', '2021-02-09 14:16:03');
 INSERT INTO `sys_feedbacks` VALUES ('4', '1', 'test', '2021-02-09 14:21:55');
 INSERT INTO `sys_feedbacks` VALUES ('5', '1', 'test2', '2021-02-09 17:56:23');
+INSERT INTO `sys_feedbacks` VALUES ('6', '1', '希望工作人员身体健康!', '2021-02-20 12:27:53');
+INSERT INTO `sys_feedbacks` VALUES ('7', '1', '希望保洁人员勤快点', '2021-03-29 10:03:37');
+INSERT INTO `sys_feedbacks` VALUES ('8', '1', '1', '2021-03-29 10:09:39');
+INSERT INTO `sys_feedbacks` VALUES ('9', '1', '1', '2021-03-29 10:10:31');
+INSERT INTO `sys_feedbacks` VALUES ('10', '1', '1212', '2021-03-29 10:13:06');
+INSERT INTO `sys_feedbacks` VALUES ('11', '1', '1212a', '2021-03-29 10:13:58');
+INSERT INTO `sys_feedbacks` VALUES ('12', '1', 'qwe', '2021-03-29 10:24:34');
+INSERT INTO `sys_feedbacks` VALUES ('13', '1', '我希望 能把这玩意染成绿的', '2021-04-14 12:01:38');
+INSERT INTO `sys_feedbacks` VALUES ('14', '1', 'weeee', '2021-04-15 15:48:29');
 
 -- ----------------------------
 -- Table structure for sys_logs
@@ -76,7 +91,7 @@ CREATE TABLE `sys_logs` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `createdTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_logs
@@ -273,6 +288,68 @@ INSERT INTO `sys_logs` VALUES ('239', 'chenhaotest1', '日志分页查询', 'com
 INSERT INTO `sys_logs` VALUES ('240', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-02-09 12:32:30');
 INSERT INTO `sys_logs` VALUES ('241', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '114', '0:0:0:0:0:0:0:1', '2021-02-09 14:20:05');
 INSERT INTO `sys_logs` VALUES ('242', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '59', '0:0:0:0:0:0:0:1', '2021-02-09 18:43:00');
+INSERT INTO `sys_logs` VALUES ('243', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '104', '0:0:0:0:0:0:0:1', '2021-02-20 12:28:11');
+INSERT INTO `sys_logs` VALUES ('244', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '9', '0:0:0:0:0:0:0:1', '2021-02-20 12:28:16');
+INSERT INTO `sys_logs` VALUES ('245', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '86', '0:0:0:0:0:0:0:1', '2021-02-22 12:33:44');
+INSERT INTO `sys_logs` VALUES ('246', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '69', '0:0:0:0:0:0:0:1', '2021-03-10 12:08:38');
+INSERT INTO `sys_logs` VALUES ('247', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '18', '0:0:0:0:0:0:0:1', '2021-03-10 12:08:45');
+INSERT INTO `sys_logs` VALUES ('248', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-03-10 12:09:37');
+INSERT INTO `sys_logs` VALUES ('249', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '125', '0:0:0:0:0:0:0:1', '2021-03-29 09:27:09');
+INSERT INTO `sys_logs` VALUES ('250', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '12', '0:0:0:0:0:0:0:1', '2021-03-29 09:27:10');
+INSERT INTO `sys_logs` VALUES ('251', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-03-29 09:30:31');
+INSERT INTO `sys_logs` VALUES ('252', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-03-29 09:30:35');
+INSERT INTO `sys_logs` VALUES ('253', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-03-29 09:30:43');
+INSERT INTO `sys_logs` VALUES ('254', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-03-29 09:30:54');
+INSERT INTO `sys_logs` VALUES ('255', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-03-29 09:39:24');
+INSERT INTO `sys_logs` VALUES ('256', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-03-29 09:48:44');
+INSERT INTO `sys_logs` VALUES ('257', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-03-29 09:48:46');
+INSERT INTO `sys_logs` VALUES ('258', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-03-29 09:49:41');
+INSERT INTO `sys_logs` VALUES ('259', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '7', '0:0:0:0:0:0:0:1', '2021-03-29 09:50:45');
+INSERT INTO `sys_logs` VALUES ('260', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '3', '0:0:0:0:0:0:0:1', '2021-03-29 09:52:17');
+INSERT INTO `sys_logs` VALUES ('261', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '3', '0:0:0:0:0:0:0:1', '2021-03-29 09:52:26');
+INSERT INTO `sys_logs` VALUES ('262', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '3', '0:0:0:0:0:0:0:1', '2021-03-29 09:53:35');
+INSERT INTO `sys_logs` VALUES ('263', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '56', '0:0:0:0:0:0:0:1', '2021-03-29 10:21:13');
+INSERT INTO `sys_logs` VALUES ('264', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-03-29 10:21:15');
+INSERT INTO `sys_logs` VALUES ('265', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '50', '0:0:0:0:0:0:0:1', '2021-03-29 10:54:16');
+INSERT INTO `sys_logs` VALUES ('266', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '39', '0:0:0:0:0:0:0:1', '2021-03-29 11:09:17');
+INSERT INTO `sys_logs` VALUES ('267', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '42', '0:0:0:0:0:0:0:1', '2021-03-29 11:11:11');
+INSERT INTO `sys_logs` VALUES ('268', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '60', '0:0:0:0:0:0:0:1', '2021-04-14 12:01:44');
+INSERT INTO `sys_logs` VALUES ('269', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-04-14 12:01:45');
+INSERT INTO `sys_logs` VALUES ('270', 'chenhaotest1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-04-14 12:01:58');
+INSERT INTO `sys_logs` VALUES ('271', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '47', '0:0:0:0:0:0:0:1', '2021-04-14 12:15:50');
+INSERT INTO `sys_logs` VALUES ('272', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-04-14 12:15:51');
+INSERT INTO `sys_logs` VALUES ('273', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '5', '0:0:0:0:0:0:0:1', '2021-04-14 12:15:54');
+INSERT INTO `sys_logs` VALUES ('274', '1', '修改自己个人信息', 'com.chen.service.impl.SysUserServiceImpl.updateUserInfo', '[1,{\"id\":1,\"username\":\"1\",\"password\":null,\"salt\":null,\"mobile\":\"18866668888\",\"email\":\"gangsterchen@163.com\",\"valid\":1,\"deptId\":null,\"deptName\":null,\"createdTime\":null,\"modifiedTime\":null,\"createdUser\":null,\"modifiedUser\":null,\"sex\":\"女\",\"birthday\":\"1998-09-22\"}]', '6', '127.0.0.1', '2021-04-14 12:18:39');
+INSERT INTO `sys_logs` VALUES ('275', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '67', '0:0:0:0:0:0:0:1', '2021-04-15 13:38:08');
+INSERT INTO `sys_logs` VALUES ('276', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 13:38:12');
+INSERT INTO `sys_logs` VALUES ('277', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 13:38:13');
+INSERT INTO `sys_logs` VALUES ('278', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 13:38:14');
+INSERT INTO `sys_logs` VALUES ('279', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-04-15 13:38:20');
+INSERT INTO `sys_logs` VALUES ('280', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '4', '0:0:0:0:0:0:0:1', '2021-04-15 14:03:13');
+INSERT INTO `sys_logs` VALUES ('281', '1', '修改自己个人信息', 'com.chen.service.impl.SysUserServiceImpl.updateUserInfo', '[1,{\"id\":1,\"username\":\"1\",\"password\":null,\"salt\":null,\"mobile\":\"18866668888\",\"email\":\"gangsterchen@163.com\",\"valid\":1,\"deptId\":null,\"deptName\":null,\"createdTime\":null,\"modifiedTime\":null,\"createdUser\":null,\"modifiedUser\":null,\"sex\":\"女\",\"birthday\":\"1998-09-22\"}]', '9', '0:0:0:0:0:0:0:1', '2021-04-15 14:03:29');
+INSERT INTO `sys_logs` VALUES ('282', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:02');
+INSERT INTO `sys_logs` VALUES ('283', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '7', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:07');
+INSERT INTO `sys_logs` VALUES ('284', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:08');
+INSERT INTO `sys_logs` VALUES ('285', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:11');
+INSERT INTO `sys_logs` VALUES ('286', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '7', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:12');
+INSERT INTO `sys_logs` VALUES ('287', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '3', '0:0:0:0:0:0:0:1', '2021-04-15 14:06:25');
+INSERT INTO `sys_logs` VALUES ('288', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-04-15 15:41:21');
+INSERT INTO `sys_logs` VALUES ('289', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '7', '0:0:0:0:0:0:0:1', '2021-04-15 15:41:24');
+INSERT INTO `sys_logs` VALUES ('290', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-15 15:45:48');
+INSERT INTO `sys_logs` VALUES ('291', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-04-15 15:46:04');
+INSERT INTO `sys_logs` VALUES ('292', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '9', '0:0:0:0:0:0:0:1', '2021-04-15 15:46:41');
+INSERT INTO `sys_logs` VALUES ('293', '1', '修改密码', 'com.chen.service.impl.SysUserServiceImpl.updatePassword', '[\"1\",\"11\",\"11\"]', '9', '0:0:0:0:0:0:0:1', '2021-04-15 15:47:34');
+INSERT INTO `sys_logs` VALUES ('294', '1', '修改自己个人信息', 'com.chen.service.impl.SysUserServiceImpl.updateUserInfo', '[1,{\"id\":1,\"username\":\"1\",\"password\":null,\"salt\":null,\"mobile\":\"18866668888\",\"email\":\"gangsterchen@163.com\",\"valid\":1,\"deptId\":null,\"deptName\":null,\"createdTime\":null,\"modifiedTime\":null,\"createdUser\":null,\"modifiedUser\":null,\"sex\":\"男\",\"birthday\":\"1998-09-22\"}]', '4', '0:0:0:0:0:0:0:1', '2021-04-15 15:47:48');
+INSERT INTO `sys_logs` VALUES ('295', '1', '修改密码', 'com.chen.service.impl.SysUserServiceImpl.updatePassword', '[\"11\",\"1\",\"1\"]', '44', '0:0:0:0:0:0:0:1', '2021-04-16 12:12:36');
+INSERT INTO `sys_logs` VALUES ('296', '1', '修改密码', 'com.chen.service.impl.SysUserServiceImpl.updatePassword', '[\"1\",\"11\",\"11\"]', '13', '127.0.0.1', '2021-04-19 09:46:52');
+INSERT INTO `sys_logs` VALUES ('297', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '73', '0:0:0:0:0:0:0:1', '2021-04-19 13:14:08');
+INSERT INTO `sys_logs` VALUES ('298', '1', '查询用户信息', 'com.chen.service.impl.SysUserServiceImpl.findById', '[1]', '4', '0:0:0:0:0:0:0:1', '2021-04-19 13:15:16');
+INSERT INTO `sys_logs` VALUES ('299', '1', '修改用户信息', 'com.chen.service.impl.SysUserServiceImpl.updateObject', '[{\"id\":1,\"username\":\"1\",\"password\":null,\"salt\":null,\"mobile\":\"18866668888\",\"email\":\"910326532@qq.com\",\"valid\":1,\"deptId\":2,\"deptName\":null,\"createdTime\":null,\"modifiedTime\":null,\"createdUser\":null,\"modifiedUser\":null,\"sex\":null,\"birthday\":null},[47]]', '10', '0:0:0:0:0:0:0:1', '2021-04-19 13:15:39');
+INSERT INTO `sys_logs` VALUES ('300', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '8', '0:0:0:0:0:0:0:1', '2021-04-19 13:15:40');
+INSERT INTO `sys_logs` VALUES ('301', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '13', '0:0:0:0:0:0:0:1', '2021-04-19 13:18:49');
+INSERT INTO `sys_logs` VALUES ('302', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '50', '0:0:0:0:0:0:0:1', '2021-04-19 13:19:26');
+INSERT INTO `sys_logs` VALUES ('303', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '10', '0:0:0:0:0:0:0:1', '2021-04-19 13:19:27');
+INSERT INTO `sys_logs` VALUES ('304', '1', '日志分页查询', 'com.chen.service.impl.SysUserServiceImpl.findPageObjects', '[\"\",1]', '6', '0:0:0:0:0:0:0:1', '2021-04-19 13:20:55');
 
 -- ----------------------------
 -- Table structure for sys_menus
@@ -337,7 +414,7 @@ CREATE TABLE `sys_notices` (
   `createdTime` datetime DEFAULT NULL,
   `modifiedTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_notices
@@ -350,7 +427,10 @@ INSERT INTO `sys_notices` VALUES ('9', '测试数据4', '测试数据4', null, '
 INSERT INTO `sys_notices` VALUES ('10', '测试数据5', '测试数据555', null, 'admin', '1', '2021-02-07 13:44:47', '2021-02-08 10:05:57');
 INSERT INTO `sys_notices` VALUES ('11', '测试数据6', '测试数据6', null, 'admin', null, '2021-02-07 13:45:05', '2021-02-07 13:45:05');
 INSERT INTO `sys_notices` VALUES ('12', '测试数据8', '测试数据8', null, 'admin', null, '2021-02-07 13:45:35', '2021-02-07 13:45:35');
-INSERT INTO `sys_notices` VALUES ('13', '测试数据99', '测试数据999', null, 'admin', '1', '2021-02-07 13:45:44', '2021-02-08 10:13:56');
+INSERT INTO `sys_notices` VALUES ('13', '沙尘暴啦', '沙尘暴啦', null, 'admin', '1', '2021-02-07 13:45:44', '2021-03-29 09:56:57');
+INSERT INTO `sys_notices` VALUES ('14', '1', '1', null, '1', null, '2021-03-29 10:03:01', '2021-03-29 10:03:01');
+INSERT INTO `sys_notices` VALUES ('15', '明天就要中期检查了', '希望别出奇奇怪怪的bug！！', null, '1', '1', '2021-04-14 11:55:48', '2021-04-14 11:56:04');
+INSERT INTO `sys_notices` VALUES ('16', 'qwe', 'qwe', null, '1', null, '2021-04-15 15:48:08', '2021-04-15 15:48:08');
 
 -- ----------------------------
 -- Table structure for sys_roles
@@ -365,16 +445,18 @@ CREATE TABLE `sys_roles` (
   `createdUser` varchar(20) DEFAULT NULL COMMENT '创建用户',
   `modifiedUser` varchar(20) DEFAULT NULL COMMENT '修改用户',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_roles
 -- ----------------------------
-INSERT INTO `sys_roles` VALUES ('47', '超级管理员', '负责系统所有模块的管理', '2020-04-29 10:59:45', '2021-02-07 14:10:04', null, null);
-INSERT INTO `sys_roles` VALUES ('48', '初级软件工程师', '负责代码实现', '2020-04-29 11:02:01', '2020-05-11 11:29:26', null, null);
-INSERT INTO `sys_roles` VALUES ('49', '中级软件工程师', '负责需求分析，模块设计', '2020-04-29 16:05:58', '2020-04-29 17:03:20', null, null);
-INSERT INTO `sys_roles` VALUES ('50', '程序员', 'cxy', '2021-01-27 20:26:06', '2021-02-02 22:12:38', null, null);
-INSERT INTO `sys_roles` VALUES ('51', '测试工程师', '测试软件Bug', '2021-01-27 20:35:04', '2021-01-28 15:39:14', null, null);
+INSERT INTO `sys_roles` VALUES ('47', '超级管理员', '负责系统所有模块的管理', '2020-04-29 10:59:45', '2021-03-29 09:45:48', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('48', '校财务', '负责对馆在校内开销的结算', '2020-04-29 11:02:01', '2021-03-29 09:45:39', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('49', '馆内客服', '负责馆内问题的答疑和引导', '2020-04-29 16:05:58', '2021-03-29 09:45:35', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('50', '安全保卫员', '负责场馆内的秩序保持工作', '2021-01-27 20:26:06', '2021-03-29 09:45:30', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('51', '保洁员', '负责场内环境的清洁', '2021-01-27 20:35:04', '2021-03-29 09:45:21', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('52', '校督察员', '负责定期对馆内各项指标进行检查', '2021-03-29 09:46:35', '2021-03-29 09:46:35', 'admin', 'admin');
+INSERT INTO `sys_roles` VALUES ('53', '学生用户', '核心用户', '2021-03-29 09:47:21', '2021-03-29 09:47:38', 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for sys_role_menus
@@ -385,7 +467,7 @@ CREATE TABLE `sys_role_menus` (
   `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
   `menu_id` int(11) DEFAULT NULL COMMENT 'ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1609 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=1763 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menus
@@ -399,87 +481,107 @@ INSERT INTO `sys_role_menus` VALUES ('1339', null, '119');
 INSERT INTO `sys_role_menus` VALUES ('1340', null, '126');
 INSERT INTO `sys_role_menus` VALUES ('1341', null, '127');
 INSERT INTO `sys_role_menus` VALUES ('1342', null, '137');
-INSERT INTO `sys_role_menus` VALUES ('1349', '49', '8');
-INSERT INTO `sys_role_menus` VALUES ('1350', '49', '47');
-INSERT INTO `sys_role_menus` VALUES ('1351', '49', '120');
-INSERT INTO `sys_role_menus` VALUES ('1352', '49', '128');
-INSERT INTO `sys_role_menus` VALUES ('1353', '49', '129');
-INSERT INTO `sys_role_menus` VALUES ('1354', '49', '130');
-INSERT INTO `sys_role_menus` VALUES ('1391', '48', '8');
-INSERT INTO `sys_role_menus` VALUES ('1392', '48', '25');
-INSERT INTO `sys_role_menus` VALUES ('1393', '48', '143');
-INSERT INTO `sys_role_menus` VALUES ('1394', '48', '47');
-INSERT INTO `sys_role_menus` VALUES ('1395', '48', '120');
-INSERT INTO `sys_role_menus` VALUES ('1396', '48', '128');
-INSERT INTO `sys_role_menus` VALUES ('1397', '48', '129');
-INSERT INTO `sys_role_menus` VALUES ('1398', '48', '130');
-INSERT INTO `sys_role_menus` VALUES ('1399', '48', '145');
-INSERT INTO `sys_role_menus` VALUES ('1447', '51', '8');
-INSERT INTO `sys_role_menus` VALUES ('1448', '51', '25');
-INSERT INTO `sys_role_menus` VALUES ('1449', '51', '131');
-INSERT INTO `sys_role_menus` VALUES ('1450', '51', '143');
-INSERT INTO `sys_role_menus` VALUES ('1451', '51', '45');
-INSERT INTO `sys_role_menus` VALUES ('1452', '51', '119');
-INSERT INTO `sys_role_menus` VALUES ('1453', '51', '126');
-INSERT INTO `sys_role_menus` VALUES ('1454', '51', '127');
-INSERT INTO `sys_role_menus` VALUES ('1455', '51', '137');
-INSERT INTO `sys_role_menus` VALUES ('1456', '51', '149');
-INSERT INTO `sys_role_menus` VALUES ('1457', '51', '46');
-INSERT INTO `sys_role_menus` VALUES ('1458', '51', '115');
-INSERT INTO `sys_role_menus` VALUES ('1459', '51', '116');
-INSERT INTO `sys_role_menus` VALUES ('1460', '51', '117');
-INSERT INTO `sys_role_menus` VALUES ('1461', '51', '118');
-INSERT INTO `sys_role_menus` VALUES ('1462', '51', '47');
-INSERT INTO `sys_role_menus` VALUES ('1463', '51', '120');
-INSERT INTO `sys_role_menus` VALUES ('1464', '51', '128');
-INSERT INTO `sys_role_menus` VALUES ('1465', '51', '129');
-INSERT INTO `sys_role_menus` VALUES ('1466', '51', '130');
-INSERT INTO `sys_role_menus` VALUES ('1467', '51', '145');
-INSERT INTO `sys_role_menus` VALUES ('1468', '51', '146');
-INSERT INTO `sys_role_menus` VALUES ('1469', '51', '147');
-INSERT INTO `sys_role_menus` VALUES ('1492', '50', '8');
-INSERT INTO `sys_role_menus` VALUES ('1493', '50', '25');
-INSERT INTO `sys_role_menus` VALUES ('1494', '50', '131');
-INSERT INTO `sys_role_menus` VALUES ('1495', '50', '143');
-INSERT INTO `sys_role_menus` VALUES ('1496', '50', '46');
-INSERT INTO `sys_role_menus` VALUES ('1497', '50', '115');
-INSERT INTO `sys_role_menus` VALUES ('1498', '50', '116');
-INSERT INTO `sys_role_menus` VALUES ('1499', '50', '117');
-INSERT INTO `sys_role_menus` VALUES ('1500', '50', '118');
-INSERT INTO `sys_role_menus` VALUES ('1501', '50', '47');
-INSERT INTO `sys_role_menus` VALUES ('1502', '50', '120');
-INSERT INTO `sys_role_menus` VALUES ('1503', '50', '128');
-INSERT INTO `sys_role_menus` VALUES ('1504', '50', '129');
-INSERT INTO `sys_role_menus` VALUES ('1505', '50', '130');
-INSERT INTO `sys_role_menus` VALUES ('1506', '50', '145');
-INSERT INTO `sys_role_menus` VALUES ('1507', '50', '150');
-INSERT INTO `sys_role_menus` VALUES ('1582', '47', '8');
-INSERT INTO `sys_role_menus` VALUES ('1583', '47', '25');
-INSERT INTO `sys_role_menus` VALUES ('1584', '47', '131');
-INSERT INTO `sys_role_menus` VALUES ('1585', '47', '143');
-INSERT INTO `sys_role_menus` VALUES ('1586', '47', '45');
-INSERT INTO `sys_role_menus` VALUES ('1587', '47', '119');
-INSERT INTO `sys_role_menus` VALUES ('1588', '47', '126');
-INSERT INTO `sys_role_menus` VALUES ('1589', '47', '127');
-INSERT INTO `sys_role_menus` VALUES ('1590', '47', '137');
-INSERT INTO `sys_role_menus` VALUES ('1591', '47', '46');
-INSERT INTO `sys_role_menus` VALUES ('1592', '47', '115');
-INSERT INTO `sys_role_menus` VALUES ('1593', '47', '116');
-INSERT INTO `sys_role_menus` VALUES ('1594', '47', '117');
-INSERT INTO `sys_role_menus` VALUES ('1595', '47', '118');
-INSERT INTO `sys_role_menus` VALUES ('1596', '47', '47');
-INSERT INTO `sys_role_menus` VALUES ('1597', '47', '120');
-INSERT INTO `sys_role_menus` VALUES ('1598', '47', '128');
-INSERT INTO `sys_role_menus` VALUES ('1599', '47', '129');
-INSERT INTO `sys_role_menus` VALUES ('1600', '47', '130');
-INSERT INTO `sys_role_menus` VALUES ('1601', '47', '145');
-INSERT INTO `sys_role_menus` VALUES ('1602', '47', '151');
-INSERT INTO `sys_role_menus` VALUES ('1603', '47', '152');
-INSERT INTO `sys_role_menus` VALUES ('1604', '47', '146');
-INSERT INTO `sys_role_menus` VALUES ('1605', '47', '147');
-INSERT INTO `sys_role_menus` VALUES ('1606', '47', '148');
-INSERT INTO `sys_role_menus` VALUES ('1607', '47', '153');
-INSERT INTO `sys_role_menus` VALUES ('1608', '47', '154');
+INSERT INTO `sys_role_menus` VALUES ('1658', '51', '8');
+INSERT INTO `sys_role_menus` VALUES ('1659', '51', '145');
+INSERT INTO `sys_role_menus` VALUES ('1660', '51', '151');
+INSERT INTO `sys_role_menus` VALUES ('1661', '51', '146');
+INSERT INTO `sys_role_menus` VALUES ('1662', '51', '152');
+INSERT INTO `sys_role_menus` VALUES ('1663', '51', '153');
+INSERT INTO `sys_role_menus` VALUES ('1664', '51', '154');
+INSERT INTO `sys_role_menus` VALUES ('1665', '50', '8');
+INSERT INTO `sys_role_menus` VALUES ('1666', '50', '45');
+INSERT INTO `sys_role_menus` VALUES ('1667', '50', '119');
+INSERT INTO `sys_role_menus` VALUES ('1668', '50', '47');
+INSERT INTO `sys_role_menus` VALUES ('1669', '50', '120');
+INSERT INTO `sys_role_menus` VALUES ('1670', '50', '145');
+INSERT INTO `sys_role_menus` VALUES ('1671', '50', '151');
+INSERT INTO `sys_role_menus` VALUES ('1672', '50', '146');
+INSERT INTO `sys_role_menus` VALUES ('1673', '50', '152');
+INSERT INTO `sys_role_menus` VALUES ('1674', '50', '153');
+INSERT INTO `sys_role_menus` VALUES ('1675', '50', '154');
+INSERT INTO `sys_role_menus` VALUES ('1676', '49', '8');
+INSERT INTO `sys_role_menus` VALUES ('1677', '49', '25');
+INSERT INTO `sys_role_menus` VALUES ('1678', '49', '143');
+INSERT INTO `sys_role_menus` VALUES ('1679', '49', '45');
+INSERT INTO `sys_role_menus` VALUES ('1680', '49', '119');
+INSERT INTO `sys_role_menus` VALUES ('1681', '49', '126');
+INSERT INTO `sys_role_menus` VALUES ('1682', '49', '127');
+INSERT INTO `sys_role_menus` VALUES ('1683', '49', '137');
+INSERT INTO `sys_role_menus` VALUES ('1684', '49', '46');
+INSERT INTO `sys_role_menus` VALUES ('1685', '49', '115');
+INSERT INTO `sys_role_menus` VALUES ('1686', '49', '47');
+INSERT INTO `sys_role_menus` VALUES ('1687', '49', '120');
+INSERT INTO `sys_role_menus` VALUES ('1688', '49', '128');
+INSERT INTO `sys_role_menus` VALUES ('1689', '49', '129');
+INSERT INTO `sys_role_menus` VALUES ('1690', '49', '130');
+INSERT INTO `sys_role_menus` VALUES ('1691', '49', '145');
+INSERT INTO `sys_role_menus` VALUES ('1692', '49', '151');
+INSERT INTO `sys_role_menus` VALUES ('1693', '49', '146');
+INSERT INTO `sys_role_menus` VALUES ('1694', '49', '152');
+INSERT INTO `sys_role_menus` VALUES ('1695', '49', '153');
+INSERT INTO `sys_role_menus` VALUES ('1696', '49', '154');
+INSERT INTO `sys_role_menus` VALUES ('1697', '48', '8');
+INSERT INTO `sys_role_menus` VALUES ('1698', '48', '25');
+INSERT INTO `sys_role_menus` VALUES ('1699', '48', '143');
+INSERT INTO `sys_role_menus` VALUES ('1700', '48', '45');
+INSERT INTO `sys_role_menus` VALUES ('1701', '48', '119');
+INSERT INTO `sys_role_menus` VALUES ('1702', '48', '46');
+INSERT INTO `sys_role_menus` VALUES ('1703', '48', '115');
+INSERT INTO `sys_role_menus` VALUES ('1704', '48', '47');
+INSERT INTO `sys_role_menus` VALUES ('1705', '48', '120');
+INSERT INTO `sys_role_menus` VALUES ('1706', '48', '145');
+INSERT INTO `sys_role_menus` VALUES ('1707', '48', '151');
+INSERT INTO `sys_role_menus` VALUES ('1708', '48', '146');
+INSERT INTO `sys_role_menus` VALUES ('1709', '48', '152');
+INSERT INTO `sys_role_menus` VALUES ('1710', '48', '153');
+INSERT INTO `sys_role_menus` VALUES ('1711', '48', '154');
+INSERT INTO `sys_role_menus` VALUES ('1712', '47', '8');
+INSERT INTO `sys_role_menus` VALUES ('1713', '47', '25');
+INSERT INTO `sys_role_menus` VALUES ('1714', '47', '131');
+INSERT INTO `sys_role_menus` VALUES ('1715', '47', '143');
+INSERT INTO `sys_role_menus` VALUES ('1716', '47', '45');
+INSERT INTO `sys_role_menus` VALUES ('1717', '47', '119');
+INSERT INTO `sys_role_menus` VALUES ('1718', '47', '126');
+INSERT INTO `sys_role_menus` VALUES ('1719', '47', '127');
+INSERT INTO `sys_role_menus` VALUES ('1720', '47', '137');
+INSERT INTO `sys_role_menus` VALUES ('1721', '47', '46');
+INSERT INTO `sys_role_menus` VALUES ('1722', '47', '115');
+INSERT INTO `sys_role_menus` VALUES ('1723', '47', '116');
+INSERT INTO `sys_role_menus` VALUES ('1724', '47', '117');
+INSERT INTO `sys_role_menus` VALUES ('1725', '47', '118');
+INSERT INTO `sys_role_menus` VALUES ('1726', '47', '47');
+INSERT INTO `sys_role_menus` VALUES ('1727', '47', '120');
+INSERT INTO `sys_role_menus` VALUES ('1728', '47', '128');
+INSERT INTO `sys_role_menus` VALUES ('1729', '47', '129');
+INSERT INTO `sys_role_menus` VALUES ('1730', '47', '130');
+INSERT INTO `sys_role_menus` VALUES ('1731', '47', '145');
+INSERT INTO `sys_role_menus` VALUES ('1732', '47', '151');
+INSERT INTO `sys_role_menus` VALUES ('1733', '47', '146');
+INSERT INTO `sys_role_menus` VALUES ('1734', '47', '152');
+INSERT INTO `sys_role_menus` VALUES ('1735', '47', '153');
+INSERT INTO `sys_role_menus` VALUES ('1736', '47', '154');
+INSERT INTO `sys_role_menus` VALUES ('1737', '52', '8');
+INSERT INTO `sys_role_menus` VALUES ('1738', '52', '25');
+INSERT INTO `sys_role_menus` VALUES ('1739', '52', '143');
+INSERT INTO `sys_role_menus` VALUES ('1740', '52', '45');
+INSERT INTO `sys_role_menus` VALUES ('1741', '52', '119');
+INSERT INTO `sys_role_menus` VALUES ('1742', '52', '46');
+INSERT INTO `sys_role_menus` VALUES ('1743', '52', '115');
+INSERT INTO `sys_role_menus` VALUES ('1744', '52', '47');
+INSERT INTO `sys_role_menus` VALUES ('1745', '52', '120');
+INSERT INTO `sys_role_menus` VALUES ('1746', '52', '145');
+INSERT INTO `sys_role_menus` VALUES ('1747', '52', '151');
+INSERT INTO `sys_role_menus` VALUES ('1748', '52', '146');
+INSERT INTO `sys_role_menus` VALUES ('1749', '52', '152');
+INSERT INTO `sys_role_menus` VALUES ('1750', '52', '153');
+INSERT INTO `sys_role_menus` VALUES ('1751', '52', '154');
+INSERT INTO `sys_role_menus` VALUES ('1756', '53', '8');
+INSERT INTO `sys_role_menus` VALUES ('1757', '53', '145');
+INSERT INTO `sys_role_menus` VALUES ('1758', '53', '151');
+INSERT INTO `sys_role_menus` VALUES ('1759', '53', '146');
+INSERT INTO `sys_role_menus` VALUES ('1760', '53', '152');
+INSERT INTO `sys_role_menus` VALUES ('1761', '53', '153');
+INSERT INTO `sys_role_menus` VALUES ('1762', '53', '154');
 
 -- ----------------------------
 -- Table structure for sys_seats
@@ -497,7 +599,7 @@ CREATE TABLE `sys_seats` (
   `usedUser` varchar(100) DEFAULT NULL,
   `lastUsedTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_seats
@@ -505,16 +607,15 @@ CREATE TABLE `sys_seats` (
 INSERT INTO `sys_seats` VALUES ('1', '一楼', null, null, '2021-02-08', '2021-02-08', 'admin', 'admin', null, null);
 INSERT INTO `sys_seats` VALUES ('2', '二楼', null, null, '2021-02-08', '2021-02-08', null, null, null, null);
 INSERT INTO `sys_seats` VALUES ('3', '三楼', null, null, '2021-02-08', null, null, null, null, null);
-INSERT INTO `sys_seats` VALUES ('4', '东区', '1', '2', '2021-02-08', '2021-02-09', null, null, '1', '2021-02-09 12:25:41');
-INSERT INTO `sys_seats` VALUES ('5', '东区', '1', '2', '2021-02-08', '2021-02-09', null, null, 'chenhao', '2021-02-09 12:30:54');
+INSERT INTO `sys_seats` VALUES ('4', '东区', '1', '1', '2021-02-08', '2021-04-16', null, null, null, '2021-04-16 12:16:05');
+INSERT INTO `sys_seats` VALUES ('5', '东区', '1', '2', '2021-02-08', '2021-04-14', null, null, 'baojie', '2021-04-14 12:19:10');
 INSERT INTO `sys_seats` VALUES ('6', '东区', '1', '1', '2021-02-08', '2021-02-09', null, null, null, '2021-02-09 12:18:48');
-INSERT INTO `sys_seats` VALUES ('7', '东区', '1', '1', '2021-02-08', '2021-02-09', null, null, null, '2021-02-09 12:18:32');
+INSERT INTO `sys_seats` VALUES ('7', '东区', '1', '2', '2021-02-08', '2021-04-15', null, null, 'stu', '2021-04-15 15:49:17');
 INSERT INTO `sys_seats` VALUES ('8', '东区', '1', '1', '2021-02-08', '2021-02-09', null, null, null, '2021-02-09 12:18:27');
 INSERT INTO `sys_seats` VALUES ('9', '西区', '1', '1', '2021-02-08', null, null, null, null, null);
 INSERT INTO `sys_seats` VALUES ('10', '西区', '1', '1', '2021-02-08', null, null, null, null, null);
 INSERT INTO `sys_seats` VALUES ('11', '西区', '1', '1', '2021-02-08', '2021-02-09', null, null, null, '2021-02-09 12:18:42');
-INSERT INTO `sys_seats` VALUES ('12', '西区', '1', '1', '2021-02-08', null, null, null, null, null);
-INSERT INTO `sys_seats` VALUES ('13', '西区', '1', '1', '2021-02-08', null, null, null, null, null);
+INSERT INTO `sys_seats` VALUES ('12', '西区', '1', '2', '2021-02-08', '2021-04-16', null, null, '1', '2021-04-16 12:16:10');
 INSERT INTO `sys_seats` VALUES ('14', '东区', '2', '1', '2021-02-08', null, null, null, null, null);
 INSERT INTO `sys_seats` VALUES ('15', '东区', '2', '1', '2021-02-08', null, null, null, null, null);
 INSERT INTO `sys_seats` VALUES ('16', '东区', '2', '1', '2021-02-08', null, null, null, null, null);
@@ -558,29 +659,14 @@ CREATE TABLE `sys_users` (
   `birthday` varchar(50) DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_users
 -- ----------------------------
-INSERT INTO `sys_users` VALUES ('1', '1', '12da55859dbf7e94f4ec640f1020bf81', 'd2fb7c19-9760-43dc-a2cc-15ec252b1c5c', 'admin@q.com', '11232353251', '1', '2', null, '2021-02-07 13:46:27', null, null, '男', '2021-02-06');
-INSERT INTO `sys_users` VALUES ('2', 'zhangli', 'bdcf69375bdb532e50279b91eb00940d', '5e7cbd36-e897-4951-b42b-19809caf3caa', 'zhangli@t.cn', '13678909876', '0', '3', '2017-07-18 10:01:51', '2018-04-22 20:49:19', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('3', 'wangke', 'c5dc32ec66041aeddf432b3146bd2257', '5e3e1475-1ea9-4a6a-976e-b07545827139', 'wangke@t.cn', '18678900987', '1', '3', '2017-07-18 11:40:53', '2018-04-22 20:48:52', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('4', 'zhangql', '+HBpqtPuj9KLBIpneR5X0A==', 'ed487fac-9952-45c9-acaa-21dab9c689cc', 'zhangql@t.cn', '13678909876', '1', '2', '2017-07-18 12:17:30', '2018-04-22 20:48:04', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('5', 'fanwei', '1acab7425d6dfae670f26bd160518902', '34fbedb2-e135-4f8d-b595-24360edc348d', 'fanwei@t.cn', '13876545678', '1', '3', '2017-07-20 17:03:22', '2018-04-22 20:47:49', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('6', 'wumei', '431ebdcccf3404787a144f9ba669a8e2', '8a14f46f-7a17-4dfe-85ab-08e63cb618ce', 'wumei@t.cn', '13567898765', '1', '2', '2017-07-21 10:57:40', '2018-04-22 20:46:49', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('7', 'user-003', '689c673a0d8bda7ee795dd45a126ae96', '3faa1d2b-a99f-4ffb-9d29-0e71563258af', 't@t.com', '123', '1', '3', '2018-01-12 23:19:58', '2018-04-22 20:46:07', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('9', 'user-002', 'e10adc3949ba59abbe56e057f20f883e', null, 't@t.com', '123', '1', '3', '2018-01-12 23:20:31', '2018-04-22 20:45:55', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('12', 'user-001', '5bf6593afd106aa544000d559f0c2241', '9528e727-2901-4746-8558-9010d9607da2', 't@t.com', '123', '1', '3', '2018-01-13 01:48:32', '2018-04-22 20:45:37', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('13', 'user-c', '2630d8bd50c76abf001a9daceeae97e6', '30fff766-e245-4a93-9f5e-6eb2c2cec494', 't@t.com', '123456', '1', '3', '2018-01-13 02:01:56', '2020-04-30 12:02:24', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('15', 'user-b', '2ce586af95c6431112092f653659c85f', 'eaedbaee-d760-40e4-b71e-ccecf01b6187', 't@t.com', '123456', '1', '3', '2018-01-13 02:02:06', '2020-04-30 12:01:31', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('16', 'lifa', '710058cf374a38d76510d009f63bf28d', 'e8e35b96-bbdd-4090-81ee-b71a36141760', 'lf@t.com', '1111111111', '0', '2', '2018-04-22 19:43:11', '2020-05-07 09:52:33', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('17', 'xiaoli', 'dd93e70c79e12b5c734080fb9ee91229', 'e0036733-1378-4ff0-a5c3-8ddc5f8e0db2', 'xl@t.com', '11122222', '0', '6', '2020-01-12 10:37:47', '2020-05-07 09:58:05', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('18', 'wangzhen', '9b12c8e94530a0d95d9e91f4d1429c4b', '4d54a593-6da5-44a8-87ca-4db7d92a526c', 'wz@t.com', '1111111111111', '1', '6', '2020-04-30 14:45:10', '2020-05-06 11:19:35', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('19', 'liqiang', '302b67d0710e887cf8164426cd59da28', '4ddeb5b4-96dc-4def-a2d7-c6c924701b76', 'lq@t.com', '1111111111111', '1', '6', '2020-05-07 10:35:07', '2020-05-11 10:48:18', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('20', 'guoqing', 'd16322520b08734174e271e263ace655', '65ec8f97-ec0f-45ff-a63d-9a7f8061c6dc', 'gq@t.com', '1111111111', '1', '2', '2020-05-07 10:39:19', '2021-01-28 20:32:48', null, 'admin', null, null);
-INSERT INTO `sys_users` VALUES ('21', 'test01', '123456', null, '123@qq.com', '123', '1', '6', '2021-01-29 17:28:57', '2021-02-02 22:11:06', null, null, null, null);
-INSERT INTO `sys_users` VALUES ('23', 'chenhao', '790382cb7d68cab5d9236e8e4df3963e', '31016fc8-5fa2-4619-98a6-62debfb12677', '123@qq.com', '111', '1', '4', '2021-01-29 17:39:03', '2021-02-05 23:52:29', null, null, null, null);
+INSERT INTO `sys_users` VALUES ('1', '1', 'cc5c7bb5ce250ed1b74511d1a6fb79bf', '4bccac75-576c-4e0a-901c-023419517e21', '910326532@qq.com', '18866668888', '1', '2', null, '2021-04-19 13:15:39', null, null, '男', '1998-09-22');
+INSERT INTO `sys_users` VALUES ('24', 'baojie', '00dd4bcc11a58099ae2788711137ada1', '7b94ecd4-4bfc-4530-b7c0-1cde58e08677', '910326532@qq.com', '13988886666', '1', '9', '2021-03-29 09:49:39', '2021-03-29 09:52:03', null, null, '女', '2021-03-16');
+INSERT INTO `sys_users` VALUES ('25', 'stu', 'b5d7ca4496fcc4fb2a307000f7958405', 'a50b7a79-e9eb-418c-97dd-f84646b99e68', '910326532@qq.com', '13947965819', '1', '12', '2021-04-15 15:46:40', '2021-04-15 15:46:40', null, null, null, '');
 
 -- ----------------------------
 -- Table structure for sys_user_roles
@@ -591,7 +677,7 @@ CREATE TABLE `sys_user_roles` (
   `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
   `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_roles
@@ -600,7 +686,9 @@ INSERT INTO `sys_user_roles` VALUES ('70', '18', '49');
 INSERT INTO `sys_user_roles` VALUES ('71', '17', '48');
 INSERT INTO `sys_user_roles` VALUES ('72', '16', '47');
 INSERT INTO `sys_user_roles` VALUES ('74', '20', '48');
-INSERT INTO `sys_user_roles` VALUES ('75', '1', '47');
 INSERT INTO `sys_user_roles` VALUES ('76', '19', '49');
 INSERT INTO `sys_user_roles` VALUES ('80', '21', '51');
 INSERT INTO `sys_user_roles` VALUES ('83', '23', '47');
+INSERT INTO `sys_user_roles` VALUES ('85', '24', '51');
+INSERT INTO `sys_user_roles` VALUES ('86', '25', '53');
+INSERT INTO `sys_user_roles` VALUES ('87', '1', '47');
