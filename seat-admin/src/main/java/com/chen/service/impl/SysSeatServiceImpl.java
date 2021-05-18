@@ -72,25 +72,24 @@ public class SysSeatServiceImpl implements SysSeatService {
     }
 
     @Override
+    @Transactional
     public int returnSeat(SysSeat entity) {
         HashMap<String, Object> userMap = sysUserService.getCurrentUserData();
         List<SysSeat> list = sysSeatDao.findObjects();
+        int flag1 = 0;
+        int flag2 = 0;
 
         for (SysSeat seat : list) {
-            if (seat.getUsedUser() == null) {
-
-            } else {
-                if (userMap.get("username").equals(seat.getUsedUser())){
-                    list.remove(seat.getUsedUser());
-                    entity.setState(1);
-                    return sysSeatDao.returnSeat(entity);
-                }
-                else if (!userMap.get("username").equals(seat.getUsedUser()))
-                    throw new ServiceException("您无权限退订他人的座位!!");
-            }
+            // 如果不为空且username相等 则进入，则还座位成功
+            if (seat.getUsedUser() != null && userMap.get("username").equals(seat.getUsedUser())) {
+                list.remove(seat.getUsedUser());
+                entity.setState(1);
+                return sysSeatDao.returnSeat(entity);
+            } else if (!userMap.get("username").equals(seat.getUsedUser())) flag1 += 1;
+            flag2 += 1;
         }
-        entity.setState(1);
-        return sysSeatDao.returnSeat(entity);
-
+        if (flag1 == flag2) throw new ServiceException("您无权限退订他人的座位!!");
+        return 0;
     }
+
 }
